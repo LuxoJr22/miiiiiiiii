@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/07/05 23:31:15 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/07/06 15:26:04 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	get_command(t_cmd *cmd, char **envp, char *line)
 	if (is_equal("echo", command))
 		ft_echo(cmd->arg);
 	else if (is_equal("pwd", command))
-		printf("%s\n", getcwd(NULL, 0));
+		ft_pwd(envp);
 	else if (is_equal("export", command))
 		ft_export(envp, cmd->arg);
 	else if (is_equal("env", command) && !cmd->arg[1])
@@ -89,7 +89,7 @@ int	is_in_quote(char *str, char c)
 	return (it);
 }
 
-char	**pre_process(char **str, char **envp)
+char	**pre_process(char **str, char **envp, char **argv)
 {
 	int		i;
 	int		y;
@@ -105,6 +105,11 @@ char	**pre_process(char **str, char **envp)
 			ret = ft_split(str[i], '$');
 			if (str[i][0] == '$' && ret[0][0] == '?')
 				str[i] = ft_strjoin((ft_itoa(g_glob)), ft_substr(ret[0], 1, ft_strlen(ret[0]) - 1));
+			if (str[i][0] == '$' && (ret[0][0] > '0' && ret[0][0] < '9'))
+			{
+				if (argc >= ret[0][0] - 48)
+					str[i] = ft_strjoin((ft_substr(argv[ret[0][0] - 48])), ft_substr(ret[0], 1, ft_strlen(ret[0]) - 1));
+			}
 			else if (str[i][0] == '$')
 				str[i] = ft_strmup(ft_getenv(envp, ret[0]));
 			else
@@ -122,9 +127,11 @@ char	**pre_process(char **str, char **envp)
 int	main(int ac, char **av, char **envp)
 {
 	char		*oui;
+	t_cmd		*cmd;
 
 	(void) ac;
 	(void) av;
+	cmd = NULL;
 	oui = getcwd(NULL, 0);
 	signal(SIGINT, interrupt);
 	signal(SIGQUIT, quit);
@@ -135,7 +142,10 @@ int	main(int ac, char **av, char **envp)
 		if (oui && *oui)
 		{
 			add_history(oui);
-			manage_exec(oui, envp);
+			cmd = parsed_line(oui, envp);
+			manage_exec(oui, envp, cmd);
+			//free_list(cmd);
+			//free(oui);
 		}
 	}
 	return (0);

@@ -1,1 +1,2 @@
-lkfekfe
+heredoc signal
+chdir protect

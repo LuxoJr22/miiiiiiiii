@@ -6,7 +6,7 @@
 /*   By: sforesti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 19:28:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/07/05 02:58:17 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:02:39 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,12 @@ char	*ft_getenv(char **envp, char *str)
 		{
 			o = 2;
 			while (line[o])
-			{
-				line[1] = ft_strjoin(ft_strjoin_f(line[1], "=", 1), line[o]);
-				o ++;
-			}
+				line[1] = ft_strjoin(ft_strjoin_f(line[1], "=", 1), line[o++]);
 		}
 		if (!ft_strncmp(line[0], str, ft_strlen(line[0]))
 			&& !ft_strncmp(line[0], str, ft_strlen(str)))
 			return (line[1]);
 	}
+	free_dptr(line);
 	return (0);
 }

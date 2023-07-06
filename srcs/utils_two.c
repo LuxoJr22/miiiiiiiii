@@ -6,7 +6,7 @@
 /*   By: sforesti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:59:54 by sforesti          #+#    #+#             */
-/*   Updated: 2023/07/05 10:09:01 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:35:50 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,33 @@ char	*ft_union(char	**str)
 		len ++;
 	}
 	return (ret);
+}
+
+void	free_list(t_cmd *cmd)
+{
+	t_cmd	*tmp;
+	t_file	*tp;
+
+	tmp = NULL;
+	tp = NULL;
+	while (cmd)
+	{
+		tmp = cmd->next;
+		while (cmd->file)
+		{
+			tp = cmd->file->next;
+			if (cmd->file->fd_file)
+				free(cmd->file->fd_file);
+			free(cmd->file);
+			cmd->file = tp;
+		}
+		if (cmd->arg)
+			free_dptr(cmd->arg);
+		if (cmd->name)
+			free(cmd->name);
+		free(cmd);
+		cmd = tmp;
+	}
 }
 
 int	size_dptr(char **str)

@@ -6,7 +6,7 @@
 /*   By: sforesti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/07/05 08:20:40 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/07/06 15:27:06 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	exec_cmd(t_cmd *cmd, char **envp, char *line);
 char	*str_lower(char *str);
 void	rl_replace_line(const char *text, int clear_undo);
 int		count_pipe(char *line);
-char	**pre_process(char **str, char **envp);
+char	**pre_process(char **str, char **envp, char **argv);
 char	**ft_split_parse(char const *s, char c);
 int		manage_pipe(t_cmd *cmd, char **envp, char *line);
 void	get_command(t_cmd *cmd, char **envp, char *line);
@@ -73,7 +73,7 @@ char	*join_path(char **str);
 t_cmd	*init_cmd_basic(t_cmd *cmd, char *line, char **envp);
 int		find_name(char	**str, int mode);
 t_cmd	*manage_cmd(char *line, char **envp);
-void	manage_exec(char *line, char **envp);
+void	manage_exec(char *line, char **envp, t_cmd *cmd);
 t_cmd	*parse_path(t_cmd *cmd, char *path);
 void	exec_for_pipe(t_cmd *cmd, char **envp);
 int		create_infile(char *limiter);
@@ -100,5 +100,7 @@ void	parsing_ex_append(t_cmd *cmd, t_file *file, int coor[2]);
 void	parsing_ex(t_cmd *cmd, t_file *file, int coor[2]);
 void	choose_parsing(t_cmd *cmd, t_file *file, char *line, int coor[2]);
 void	call_parsing_redir(t_cmd *cmd, char *lines, char *line);
+void	ft_pwd(char **envp);
+void	free_list(t_cmd *cmd);
 
 #endif

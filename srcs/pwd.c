@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sforesti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/05 02:58:59 by sforesti          #+#    #+#             */
-/*   Updated: 2023/07/06 12:56:56 by sforesti         ###   ########.fr       */
+/*   Created: 2023/07/06 09:54:40 by sforesti          #+#    #+#             */
+/*   Updated: 2023/07/06 12:35:50 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_exit(char **envp, char	*arg)
+void	ft_pwd(char **envp)
 {
-	int	i;
-
-	i = 0;
-	if (envp && envp[1])
-		i = ft_atoi(envp[1]) % 256;
-	printf("exit\n");
-	if (arg)
-		printf ("Minishell: exit: %s: numeric argument required\n", arg);
-	exit (i);
+	printf("%s\n", ft_getenv(envp, "PWD"));
 }

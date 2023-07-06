@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 12:07:17 by sforesti          #+#    #+#             */
-/*   Updated: 2023/07/05 23:19:40 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/07/06 14:11:44 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,26 +51,26 @@ int	verif(char *line)
 	return (0);
 }
 
-void	manage_exec(char *line, char **envp)
+void	manage_exec(char *line, char **envp, t_cmd *cmd)
 {
-	t_cmd	*cmd;
-
 	if (verif(line) == -1)
 	{
 		printf ("Minishell: syntax error near unexpected token `|'\n");
-		exit(2);
+		g_glob = 258;
+		return ;
 	}
 	if (verif(line) == -2)
 	{
 		printf ("Minishell: syntax error near unexpected token `>'\n");
-		exit(2);
+		g_glob = 258;
+		return ;
 	}
 	if (verif(line) == -3)
 	{
 		printf ("Minishell: syntax error near unexpected token `<'\n");
-		exit(2);
+		g_glob = 258;
+		return ;
 	}
-	cmd = parsed_line(line, envp);
 	if (cmd->next)
 		manage_pipe(cmd, envp, line);
 	else

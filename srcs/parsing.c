@@ -6,7 +6,7 @@
 /*   By: sforesti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 17:50:17 by sforesti          #+#    #+#             */
-/*   Updated: 2023/07/05 10:15:56 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/07/06 15:25:48 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	init_struct(t_cmd *cmd)
 	cmd->next = 0;
 }
 
-void	get_commands(char *line, t_cmd *cmd, char **envp)
+void	get_commands(char *line, t_cmd *cmd, char **envp, char **argv)
 {
 	char	**cmds;
 	int		i;
@@ -93,7 +93,7 @@ void	get_commands(char *line, t_cmd *cmd, char **envp)
 		cmd->arg = ft_split_parse(cmds[i], ' ');
 		cmd->here_doc = 0;
 		call_parsing_redir(cmd, lines, line);
-		pre_process(cmd->arg, envp);
+		pre_process(cmd->arg, envp, argv);
 		cmd->name = acces_cmd(envp, cmd->arg[0]);
 		if (cmds[i + 1])
 		{
@@ -103,6 +103,7 @@ void	get_commands(char *line, t_cmd *cmd, char **envp)
 		}
 		i ++;
 	}
+	free_dptr(cmds);
 	cmd->next = 0;
 }
 
