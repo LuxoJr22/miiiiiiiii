@@ -93,7 +93,7 @@ char	*ft_getenv(char **envp, char *str)
 				line[1] = ft_strjoin(ft_strjoin_f(line[1], "=", 1), line[o++]);
 		}
 		if (!ft_strncmp(line[0], str, ft_strlen(line[0]))
-			&& !ft_strncmp(line[0], str, ft_strlen(str)))
+			&& !ft_strncmp(line[0], str, ft_strlen(str))) //leaks
 			return (line[1]);
 	}
 	free_dptr(line);

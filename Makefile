@@ -9,7 +9,7 @@ CFLAGS += -Iincludes
 NAME = minishell
 NAME_BONUS =
 RM = rm -f
-LIBS = -Llibft -lft -lreadline -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
+LIBS = -Llibft -lft -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include/readline/
 
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)

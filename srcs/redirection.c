@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	open_files_enter(t_cmd *cmd, t_file *file)
+int	open_files_enter(t_cmd *cmd, t_file *file, char **envp)
 {
 	int	fd;
 
@@ -29,7 +29,7 @@ int	open_files_enter(t_cmd *cmd, t_file *file)
 	}
 	if (file->type == 3)
 	{
-		fd = create_infile(file->fd_file);
+		fd = create_infile(file->fd_file, envp);
 		if (fd == -1)
 		{
 			perror(ft_strjoin_f("Minishell: ", file->fd_file, 4));
@@ -57,7 +57,6 @@ int	open_files_exit(t_cmd *cmd, t_file *file)
 	}
 	if (file->type == 4)
 	{
-		printf ("a\n");
 		fd = open (file->fd_file, O_CREAT | O_APPEND | O_RDWR, 0644);
 		if (fd == -1)
 		{
@@ -69,7 +68,7 @@ int	open_files_exit(t_cmd *cmd, t_file *file)
 	return (fd);
 }
 
-void	redirection(t_cmd *cmd, t_file *file)
+void	redirection(t_cmd *cmd, t_file *file, char **envp)
 {
 	int	fd[2];
 
@@ -78,7 +77,7 @@ void	redirection(t_cmd *cmd, t_file *file)
 	while (file)
 	{
 		if (file->fd_file && (file->type == 1 || file->type == 3))
-			fd[0] = open_files_enter(cmd, file);
+			fd[0] = open_files_enter(cmd, file, envp);
 		if (file->fd_file && (file->type == 2 || file->type == 4))
 			fd[1] = open_files_exit(cmd, file);
 		if (file->next

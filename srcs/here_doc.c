@@ -24,7 +24,117 @@ char	*read_input(char *limiter, char *str, char *line)
 	}
 }
 
-int	create_infile(char *limiter)
+int	add_var_env(char *var, char **envp, char *line)
+{
+	char	*content;
+	int		i;
+	int		y;
+
+	y = 0;
+	i = ft_strlen(line);
+	content = ft_strmup(ft_getenv(envp, var));
+	while (content[y])
+	{
+		line[i] = content[y];
+		i ++;
+		y ++;
+	}
+	return (i);
+}
+
+int	is_good_name_var(char *str, int i)
+{
+	if (str[i] == '$' && ((str[i - 1] == 34 && str[i + 1] != 34) ||
+		(str[i - 1] == 39 && str[i + 1] != 39) ||
+			(str[i - 1] != 34 && ft_isalnum(str[i + 1])) ||
+				(str[i - 1] != 39 && ft_isalnum(str[i + 1]))))
+		return (1);
+	return (0);
+}
+
+int strlen_name_var(int i, char *str)
+{
+	int k;
+
+	i ++;
+	k = i;
+	while (str[k] != ' ' && str[k] && str[k] != '\n' && str[k] != 34 && str[k] != 39)
+		k ++;
+	return (k);
+}
+
+char	*dup_name_var(int i, char *str, char *word)
+{
+	int k;
+
+	i ++;
+	k = i;
+	while (str[k] != ' ' && str[k] && str[k] != '\n' && str[k] != 34 && str[k] != 39)
+		k ++;
+	word = malloc(sizeof(char) * (k + 1));
+	k = 0;
+	while (str[i] != ' ' && str[i] && str[i] != '\n' && str[i] != 34 && str[i] != 39)
+	{
+		word[k] = str[i];
+		k ++;
+		i ++;
+	}
+	word[k] = '\0';
+	return (word);
+}
+
+int size_alloc(char *str, char **envp)
+{
+	int i;
+	int size;
+	char *word;
+
+	i = 0;
+	size = 0;
+	while (str[i])
+	{
+		if (is_good_name_var(str, i))
+		{
+			word = dup_name_var(i, str, word);
+			i += ft_strlen (word);
+			size += ft_strlen(ft_getenv(envp, word));
+		}
+		else
+			size ++;
+		i++;
+	}
+	return (0);
+}
+
+char	*modif(char *str, char **envp)
+{
+	char	*line;
+	char	*word;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	line = malloc(1000000);
+	word = NULL;
+	//size_alloc(str, envp);
+	while (str[i])
+	{
+		if (is_good_name_var(str, i))
+		{
+			word = dup_name_var(i, str, word);
+			i = strlen_name_var(i, str);
+			j = add_var_env(word, envp, line);
+		}
+		line[j] = str[i];
+		j ++;
+		i ++;
+	}
+	//free (str);
+	return (line);
+}
+
+int	create_infile(char *limiter, char **envp)
 {
 	char	*line;
 	char	*str;
@@ -39,8 +149,10 @@ int	create_infile(char *limiter)
 	str = read_input(limiter, str, line);
 	free (line);
 	str = ft_strjoin_f(str, ft_strdup("\0"), 3);
-	write (fd_hd[1], str, ft_strlen(str));
+	line = modif(ft_strdup(str), envp);
+	write (fd_hd[1], line, ft_strlen(line));
 	free(str);
+	str = NULL;
 	free(limiter);
 	in_fd = dup(fd_hd[0]);
 	close(fd_hd[0]);

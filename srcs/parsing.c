@@ -107,18 +107,18 @@ void	get_commands(char *line, t_cmd *cmd, char **envp, char **argv)
 	cmd->next = 0;
 }
 
-t_cmd	*parsed_line(char *line, char **envp)
+t_cmd	*parsed_line(char *line, char **envp, char **argv)
 {
 	t_cmd	*cmd;
 	t_cmd	*begin_cmd;
 
 	cmd = malloc(sizeof(t_cmd));
 	cmd->file = 0;
-	get_commands(line, cmd, envp);
+	get_commands(line, cmd, envp, argv);
 	begin_cmd = cmd;
 	while (cmd)
 	{
-		redirection(cmd, cmd->file);
+		redirection(cmd, cmd->file, envp);
 		cmd = cmd->next;
 	}
 	return (begin_cmd);

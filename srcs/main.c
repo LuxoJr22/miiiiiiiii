@@ -97,6 +97,7 @@ char	**pre_process(char **str, char **envp, char **argv)
 
 	i = -1;
 	y = 1;
+	(void) argv;
 	while (str[++i])
 	{
 		if (is_in_quote(str[i], '$'))
@@ -105,11 +106,11 @@ char	**pre_process(char **str, char **envp, char **argv)
 			ret = ft_split(str[i], '$');
 			if (str[i][0] == '$' && ret[0][0] == '?')
 				str[i] = ft_strjoin((ft_itoa(g_glob)), ft_substr(ret[0], 1, ft_strlen(ret[0]) - 1));
-			if (str[i][0] == '$' && (ret[0][0] > '0' && ret[0][0] < '9'))
+			/*if (str[i][0] == '$' && (ret[0][0] > '0' && ret[0][0] < '9'))
 			{
 				if (argc >= ret[0][0] - 48)
 					str[i] = ft_strjoin((ft_substr(argv[ret[0][0] - 48])), ft_substr(ret[0], 1, ft_strlen(ret[0]) - 1));
-			}
+			}*/
 			else if (str[i][0] == '$')
 				str[i] = ft_strmup(ft_getenv(envp, ret[0]));
 			else
@@ -142,7 +143,7 @@ int	main(int ac, char **av, char **envp)
 		if (oui && *oui)
 		{
 			add_history(oui);
-			cmd = parsed_line(oui, envp);
+			cmd = parsed_line(oui, envp, av);
 			manage_exec(oui, envp, cmd);
 			//free_list(cmd);
 			//free(oui);

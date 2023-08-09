@@ -76,15 +76,15 @@ t_cmd	*manage_cmd(char *line, char **envp);
 void	manage_exec(char *line, char **envp, t_cmd *cmd);
 t_cmd	*parse_path(t_cmd *cmd, char *path);
 void	exec_for_pipe(t_cmd *cmd, char **envp);
-int		create_infile(char *limiter);
+int		create_infile(char *limiter, char **envp);
 void	redirect_ex_cmd_basic(t_file *file);
 void	redirect_en_cmd_basic(t_file *file);
 char	*ft_union(char	**str);
-t_cmd	*parsed_line(char *line, char **envp);
+t_cmd	*parsed_line(char *line, char **envp, char **argv);
 void	manage_redirec(t_cmd *cmd, char *line);
 t_file	*init_tfile(char *line);
 char	*reset_quote(char *str);
-void	redirection(t_cmd *cmd, t_file *file);
+void	redirection(t_cmd *cmd, t_file *file, char **envp);
 void	quit(int i);
 void	handle_ctrl(void);
 void	interrupt(int i);
@@ -102,5 +102,6 @@ void	choose_parsing(t_cmd *cmd, t_file *file, char *line, int coor[2]);
 void	call_parsing_redir(t_cmd *cmd, char *lines, char *line);
 void	ft_pwd(char **envp);
 void	free_list(t_cmd *cmd);
+char	*ft_strmup(const char *s1);
 
 #endif
