@@ -12,13 +12,8 @@
 
 #include "minishell.h"
 
-void	get_command(t_cmd *cmd, char **envp, char *line)
+int	built_in(char *command, t_cmd *cmd, char **envp)
 {
-	char	*command;
-
-	command = NULL;
-	if (cmd->arg[0] != NULL)
-		command = str_lower(cmd->arg[0]);
 	if (is_equal("echo", command))
 		ft_echo(cmd->arg);
 	else if (is_equal("pwd", command))
@@ -34,10 +29,34 @@ void	get_command(t_cmd *cmd, char **envp, char *line)
 	else if (is_equal("cd", command))
 		ft_cd(cmd->arg[1], envp);
 	else
+		return (0);
+	return (1);
+}
+
+void	get_command(t_cmd *cmd, char **envp, char *line)
+{
+	char	*command;
+	int		stdin_me;
+	int		stdout_me;
+	int		boolean;
+
+	command = NULL;
+	if (cmd->arg[0] != NULL)
+		command = str_lower(cmd->arg[0]);
+	stdin_me = dup(STDIN_FILENO);
+	stdout_me = dup(STDOUT_FILENO);
+	if (cmd->in && cmd->in != -1)
+		dup2(cmd->in, STDIN_FILENO);
+	if (cmd->out && cmd->out != -1)
+		dup2(cmd->out, STDOUT_FILENO);
+	boolean = built_in(command, cmd, envp);
+	dup2(stdin_me, 0);
+	dup2(stdout_me, 1);
+	if (!boolean)
 	{
 		exec_cmd(cmd, envp, line);
 		if (!count_pipe(line) || command == NULL)
-			waitpid(-1, NULL, 0);
+		waitpid(-1, NULL, 0);
 	}
 }
 

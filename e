@@ -1,2 +1,4 @@
-heredoc signal
-chdir protect
+dkjs
+dslkd
+/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin
+e
