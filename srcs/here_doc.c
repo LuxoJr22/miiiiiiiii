@@ -99,11 +99,11 @@ int size_alloc(char *str, char **envp)
 			i += ft_strlen (word);
 			size += ft_strlen(ft_getenv(envp, word));
 		}
-		else
+		else if (str[i] != '\n' && str[i] != '\0')
 			size ++;
-		i++;
+		i ++;
 	}
-	return (0);
+	return (size + 1);
 }
 
 char	*modif(char *str, char **envp)
@@ -115,9 +115,9 @@ char	*modif(char *str, char **envp)
 
 	i = 0;
 	j = 0;
-	line = malloc(1000000);
+	line = malloc(sizeof(char) * size_alloc(str, envp));
 	word = NULL;
-	//size_alloc(str, envp);
+	
 	while (str[i])
 	{
 		if (is_good_name_var(str, i))
@@ -125,12 +125,14 @@ char	*modif(char *str, char **envp)
 			word = dup_name_var(i, str, word);
 			i = strlen_name_var(i, str);
 			j = add_var_env(word, envp, line);
+			free (word);
 		}
 		line[j] = str[i];
 		j ++;
 		i ++;
 	}
 	//free (str);
+	//free (line);
 	return (line);
 }
 
@@ -152,7 +154,7 @@ int	create_infile(char *limiter, char **envp)
 	line = modif(ft_strdup(str), envp);
 	write (fd_hd[1], line, ft_strlen(line));
 	free(str);
-	str = NULL;
+	free (line);
 	free(limiter);
 	in_fd = dup(fd_hd[0]);
 	close(fd_hd[0]);

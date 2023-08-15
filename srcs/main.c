@@ -154,7 +154,7 @@ int	main(int ac, char **av, char **envp)
 	cmd = NULL;
 	oui = getcwd(NULL, 0);
 	signal(SIGINT, interrupt);
-	signal(SIGQUIT, quit);
+	signal(EOF, quit);
 	while (oui != 0)
 	{
 		g_glob = errno;
