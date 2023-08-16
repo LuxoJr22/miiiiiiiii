@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 09:54:40 by sforesti          #+#    #+#             */
-/*   Updated: 2023/07/06 12:35:50 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/16 17:45:58 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,9 @@
 
 void	ft_pwd(char **envp)
 {
-	printf("%s\n", ft_getenv(envp, "PWD"));
+	char	*ret;
+
+	ret = ft_getenv(envp, "PWD");
+	printf("%s\n", ret);
+	free(ret);
 }

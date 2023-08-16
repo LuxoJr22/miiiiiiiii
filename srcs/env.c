@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 19:28:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/07/06 14:02:39 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/16 17:00:11 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ char	*ft_getenv(char **envp, char *str)
 				line[1] = ft_strjoin(ft_strjoin_f(line[1], "=", 1), line[o++]);
 		}
 		if (!ft_strncmp(line[0], str, ft_strlen(line[0]))
-			&& !ft_strncmp(line[0], str, ft_strlen(str))) //leaks
-			return (line[1]);
+			&& !ft_strncmp(line[0], str, ft_strlen(str)))
+			return (free_dptr_line(line, line[1]));
+		free_dptr(line);
 	}
-	free_dptr(line);
 	return (0);
 }

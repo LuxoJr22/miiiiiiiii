@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:33:52 by sforesti          #+#    #+#             */
-/*   Updated: 2023/07/06 14:32:01 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:57:33 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_dptr(char	**dptr)
+void	free_dptr(char **dptr)
 {
 	int	i;
 
@@ -20,6 +20,15 @@ void	free_dptr(char	**dptr)
 	while (dptr[++i])
 		free(dptr[i]);
 	free(dptr);
+}
+
+char	*free_dptr_line(char **dptr, char *str)
+{
+	char	*ret;
+
+	ret = ft_strdup(str);
+	free_dptr(dptr);
+	return (ret);
 }
 
 char	*acces_cmd(char **envp, char *cmd)
@@ -72,9 +81,12 @@ void	exec_cmd(t_cmd *cmd, char **envp, char *line)
 			status = execve(cmd->name, cmd->arg, envp);
 		if (status == -1)
 		{
-			tmp = ft_strjoin_f("Minishell: ", cmd->arg[0], 4);
-			ft_putstr_fd(ft_strjoin_f(tmp, ": command not found\n", 1), 2);
+			tmp = ft_strjoin_f(ft_strjoin_f("Minishell: ",
+				cmd->arg[0], 4), ": command not found\n", 1);
+			ft_putstr_fd(tmp, 2);
+			free(tmp);
 			g_glob = 127;
+			exit(1);
 		}
 	}
 }

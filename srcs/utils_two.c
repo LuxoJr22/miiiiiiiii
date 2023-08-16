@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_two.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:59:54 by sforesti          #+#    #+#             */
-/*   Updated: 2023/07/06 14:35:50 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/16 18:50:55 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	free_list(t_cmd *cmd)
 		}
 		if (cmd->arg && cmd->arg[0] && cmd->arg[0][0] != '\0')
 			free_dptr(cmd->arg);
-		if (cmd->name)
-			free(cmd->name);
+		//if (cmd->name)
+			//free(cmd->name);
 		free(cmd);
 		cmd = tmp;
 	}
@@ -65,7 +65,7 @@ int	size_dptr(char **str)
 {
 	int	i;
 
-	i = -1;
+	i = 0;
 	while (str[i])
 		i++;
 	return (i);

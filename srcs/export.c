@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:44:31 by sforesti          #+#    #+#             */
-/*   Updated: 2023/07/06 15:00:31 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/16 18:56:14 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	ft_export2(char **envp, char **str, int i, int y)
 		i ++;
 	}
 	if (envp[i] && is_in(str[y], '='))
+	{
 		envp[i] = ft_strdup(str[y]);
+	}
 	else if (!envp[i])
 	{
 		envp[i] = ft_strdup(str[y]);

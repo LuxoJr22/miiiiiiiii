@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 17:50:17 by sforesti          #+#    #+#             */
-/*   Updated: 2023/07/06 15:25:48 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/16 18:45:11 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	init_struct(t_cmd *cmd)
 	cmd->next = 0;
 }
 
-void	get_commands(char *line, t_cmd *cmd, char **envp, char **argv)
+void	get_commands(char *line, t_cmd *cmd, char **envp)
 {
 	char	**cmds;
 	int		i;
@@ -93,7 +93,7 @@ void	get_commands(char *line, t_cmd *cmd, char **envp, char **argv)
 		cmd->arg = ft_split_parse(cmds[i], ' ');
 		cmd->here_doc = 0;
 		call_parsing_redir(cmd, lines, line);
-		pre_process(cmd->arg, envp, argv);
+		pre_process(cmd->arg, envp);
 		cmd->name = acces_cmd(envp, cmd->arg[0]);
 		if (cmds[i + 1])
 		{
@@ -107,14 +107,14 @@ void	get_commands(char *line, t_cmd *cmd, char **envp, char **argv)
 	cmd->next = 0;
 }
 
-t_cmd	*parsed_line(char *line, char **envp, char **argv)
+t_cmd	*parsed_line(char *line, char **envp)
 {
 	t_cmd	*cmd;
 	t_cmd	*begin_cmd;
 
 	cmd = malloc(sizeof(t_cmd));
 	cmd->file = 0;
-	get_commands(line, cmd, envp, argv);
+	get_commands(line, cmd, envp);
 	begin_cmd = cmd;
 	while (cmd)
 	{

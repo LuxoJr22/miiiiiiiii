@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/16 16:18:15 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/16 18:38:19 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	exec_cmd(t_cmd *cmd, char **envp, char *line);
 char	*str_lower(char *str);
 void	rl_replace_line(const char *text, int clear_undo);
 int		count_pipe(char *line);
-char	**pre_process(char **str, char **envp, char **argv);
+char	**pre_process(char **str, char **envp);
 char	**ft_split_parse(char const *s, char c);
 int		manage_pipe(t_cmd *cmd, char **envp, char *line);
 void	get_command(t_cmd *cmd, char **envp, char *line);
@@ -80,10 +80,11 @@ int		create_infile(char *limiter, char **envp);
 void	redirect_ex_cmd_basic(t_file *file);
 void	redirect_en_cmd_basic(t_file *file);
 char	*ft_union(char	**str);
-t_cmd	*parsed_line(char *line, char **envp, char **argv);
+t_cmd	*parsed_line(char *line, char **envp);
 void	manage_redirec(t_cmd *cmd, char *line);
 t_file	*init_tfile(char *line);
 char	*reset_quote(char *str);
+void	init_struct(t_cmd *cmd);
 void	redirection(t_cmd *cmd, t_file *file, char **envp);
 void	quit(int i);
 void	handle_ctrl(void);
@@ -107,5 +108,6 @@ int		add_var_env(char *var, char **envp, char *line);
 int		size_alloc(char *str, char **envp);
 int		is_good_name_var(char *str, int i);
 char	*dup_name_var(int i, char *str, char *word);
+char	*free_dptr_line(char **dptr, char *str);
 
 #endif

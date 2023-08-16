@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/07/06 15:26:04 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/16 18:49:03 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	get_command(t_cmd *cmd, char **envp, char *line)
 		if (!count_pipe(line) || command == NULL)
 			waitpid(-1, NULL, 0);
 	}
+	free(command);
 }
 
 char	*ft_strmup(const char *s1)
@@ -108,7 +109,7 @@ int	is_in_quote(char *str, char c)
 	return (it);
 }
 
-char	**pre_process(char **str, char **envp, char **argv)
+char	**pre_process(char **str, char **envp)
 {
 	int		i;
 	int		y;
@@ -116,7 +117,6 @@ char	**pre_process(char **str, char **envp, char **argv)
 
 	i = -1;
 	y = 1;
-	(void) argv;
 	while (str[++i])
 	{
 		if (is_in_quote(str[i], '$'))
@@ -124,46 +124,63 @@ char	**pre_process(char **str, char **envp, char **argv)
 			str[i] = reset_quote(str[i]);
 			ret = ft_split(str[i], '$');
 			if (str[i][0] == '$' && ret[0][0] == '?')
-				str[i] = ft_strjoin((ft_itoa(g_glob)), ft_substr(ret[0], 1, ft_strlen(ret[0]) - 1));
+			{
+				free(str[i]);
+				str[i] = ft_strjoin_f((ft_itoa(g_glob)), ft_substr(ret[0], 1, ft_strlen(ret[0]) - 1), 3);
+			}
 			/*if (str[i][0] == '$' && (ret[0][0] > '0' && ret[0][0] < '9'))
 			{
 				if (argc >= ret[0][0] - 48)
 					str[i] = ft_strjoin((ft_substr(argv[ret[0][0] - 48])), ft_substr(ret[0], 1, ft_strlen(ret[0]) - 1));
 			}*/
 			else if (str[i][0] == '$')
-				str[i] = ft_strmup(ft_getenv(envp, ret[0]));
+			{
+				free(str[i]);
+				str[i] = ft_getenv(envp, ret[0]);
+			}
 			else
+			{
+				free(str[i]);
 				str[i] = ft_strmup(ret[0]);
+			}
 			while (ret[y++])
-				str[i] = ft_strjoin_f(str[i], ft_getenv(envp, ret[y]), 1);
+				str[i] = ft_strjoin_f(str[i], ft_getenv(envp, ret[y]), 3);
 			y = 1;
+			free_dptr(ret);
 		}
 		else
 			str[i] = reset_quote(str[i]);
 	}
-	return (str);
+	return (NULL);
 }
 
 int	main(int ac, char **av, char **envp)
 {
 	char		*oui;
 	t_cmd		*cmd;
+	char		**envn;
+	int			i;
 
 	(void) ac;
 	(void) av;
+	i = -1;
+	envn = malloc(sizeof(char *) * size_dptr(envp) + 1);
+	while (envp[++i])
+		envn[i] = ft_strdup(envp[i]);
+	envn[i + 1] = 0;
 	cmd = NULL;
 	oui = getcwd(NULL, 0);
 	signal(SIGINT, interrupt);
-	signal(EOF, quit);
 	while (oui != 0)
 	{
 		//g_glob = errno;
+		free(oui);
 		oui = readline("Minishell>");
 		if (oui && *oui)
 		{
 			add_history(oui);
-			cmd = parsed_line(oui, envp, av);
-			manage_exec(oui, envp, cmd);
+			cmd = parsed_line(oui, envn);
+			manage_exec(oui, envn, cmd);
 			free_list(cmd);
 			//free(oui);
 		}
