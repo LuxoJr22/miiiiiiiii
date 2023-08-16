@@ -47,12 +47,12 @@ void	free_list(t_cmd *cmd)
 		while (cmd->file)
 		{
 			tp = cmd->file->next;
-			if (cmd->file->fd_file)
+			if (cmd->file->fd_file && cmd->file->fd_file[0] != '\0')
 				free(cmd->file->fd_file);
 			free(cmd->file);
 			cmd->file = tp;
 		}
-		if (cmd->arg)
+		if (cmd->arg && cmd->arg[0][0] != '\0')
 			free_dptr(cmd->arg);
 		if (cmd->name)
 			free(cmd->name);

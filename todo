@@ -2,3 +2,6 @@ heredoc signal
 chdir protect
 command + heredoc
 redir cat<file
+pipe seul en fin de ligne 
+here_doc quitte le prog avec ctrl\d
+manque exit quand prompt vide avec ctrl\d

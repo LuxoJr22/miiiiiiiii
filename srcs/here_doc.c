@@ -32,7 +32,12 @@ int	add_var_env(char *var, char **envp, char *line)
 
 	y = 0;
 	i = ft_strlen(line);
-	content = ft_strmup(ft_getenv(envp, var));
+	content = ft_strmup(ft_getenv(envp, var)); 
+	if (!content)
+	{
+		line[i] = '\n';
+		return (1);
+	}
 	while (content[y])
 	{
 		line[i] = content[y];
@@ -83,21 +88,33 @@ char	*dup_name_var(int i, char *str, char *word)
 	return (word);
 }
 
+int count_size(int size, char *content)
+{
+	if (!content)
+		size ++;
+	else
+		size += ft_strlen(content);
+	return (size);
+}
+
 int size_alloc(char *str, char **envp)
 {
 	int i;
 	int size;
 	char *word;
+	char *content;
 
 	i = 0;
 	size = 0;
+	content = NULL;
 	while (str[i])
 	{
 		if (is_good_name_var(str, i))
 		{
 			word = dup_name_var(i, str, word);
 			i += ft_strlen (word);
-			size += ft_strlen(ft_getenv(envp, word));
+			content = ft_getenv(envp, word);
+			size += count_size(size, content);
 		}
 		else if (str[i] != '\n' && str[i] != '\0')
 			size ++;
@@ -117,7 +134,6 @@ char	*modif(char *str, char **envp)
 	j = 0;
 	line = malloc(sizeof(char) * size_alloc(str, envp));
 	word = NULL;
-	
 	while (str[i])
 	{
 		if (is_good_name_var(str, i))
@@ -131,6 +147,7 @@ char	*modif(char *str, char **envp)
 		j ++;
 		i ++;
 	}
+	line[j] = '\0';
 	//free (str);
 	//free (line);
 	return (line);
@@ -155,7 +172,6 @@ int	create_infile(char *limiter, char **envp)
 	write (fd_hd[1], line, ft_strlen(line));
 	free(str);
 	free (line);
-	free(limiter);
 	in_fd = dup(fd_hd[0]);
 	close(fd_hd[0]);
 	close(fd_hd[1]);
