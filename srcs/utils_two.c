@@ -52,7 +52,7 @@ void	free_list(t_cmd *cmd)
 			free(cmd->file);
 			cmd->file = tp;
 		}
-		if (cmd->arg && cmd->arg[0][0] != '\0')
+		if (cmd->arg && cmd->arg[0] && cmd->arg[0][0] != '\0')
 			free_dptr(cmd->arg);
 		if (cmd->name)
 			free(cmd->name);

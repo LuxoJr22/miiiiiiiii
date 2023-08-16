@@ -56,7 +56,7 @@ void	get_command(t_cmd *cmd, char **envp, char *line)
 	{
 		exec_cmd(cmd, envp, line);
 		if (!count_pipe(line) || command == NULL)
-		waitpid(-1, NULL, 0);
+			waitpid(-1, NULL, 0);
 	}
 }
 
@@ -157,14 +157,14 @@ int	main(int ac, char **av, char **envp)
 	signal(EOF, quit);
 	while (oui != 0)
 	{
-		g_glob = errno;
+		//g_glob = errno;
 		oui = readline("Minishell>");
 		if (oui && *oui)
 		{
 			add_history(oui);
 			cmd = parsed_line(oui, envp, av);
 			manage_exec(oui, envp, cmd);
-			//free_list(cmd);
+			free_list(cmd);
 			//free(oui);
 		}
 	}

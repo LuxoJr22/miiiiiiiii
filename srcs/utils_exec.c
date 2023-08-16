@@ -75,7 +75,6 @@ void	exec_cmd(t_cmd *cmd, char **envp, char *line)
 			tmp = ft_strjoin_f("Minishell: ", cmd->arg[0], 4);
 			ft_putstr_fd(ft_strjoin_f(tmp, ": command not found\n", 1), 2);
 			g_glob = 127;
-			exit(0);
 		}
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/07/06 15:27:06 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:18:15 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,9 @@ void	call_parsing_redir(t_cmd *cmd, char *lines, char *line);
 void	ft_pwd(char **envp);
 void	free_list(t_cmd *cmd);
 char	*ft_strmup(const char *s1);
+int		add_var_env(char *var, char **envp, char *line);
+int		size_alloc(char *str, char **envp);
+int		is_good_name_var(char *str, int i);
+char	*dup_name_var(int i, char *str, char *word);
 
 #endif
