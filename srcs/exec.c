@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 12:07:17 by sforesti          #+#    #+#             */
-/*   Updated: 2023/07/06 14:11:44 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:54:34 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	verif(char *line)
 			return (-1);
 		if (line[i] == '>' && line[i + 1] == '>' && line[i + 2] == '>')
 			return (-2);
-		if (line[i] == '<' && line[i + 1] == '<' && line[i + 2] == '<')
+		if (line[i] == '<' && line[i + 1] == '<' && line[i + 2] == '<') //erreur different avec un pipe
 			return (-3);
 		i ++;
 		if (line[i] == 34)

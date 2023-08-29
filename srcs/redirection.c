@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 20:16:02 by sforesti          #+#    #+#             */
-/*   Updated: 2023/07/06 12:35:44 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:28:27 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	open_files_enter(t_cmd *cmd, t_file *file, char **envp)
 	}
 	if (file->type == 3)
 	{
+		
 		fd = create_infile(file->fd_file, envp);
 		if (fd == -1)
 		{
