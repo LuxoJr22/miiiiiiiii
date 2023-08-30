@@ -6,7 +6,7 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 08:15:45 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/29 16:44:31 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:07:36 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	call_parsing_redir(t_cmd *cmd, char *lines, char *line)
 		lines = ft_union(cmd->arg);
 		free_dptr(cmd->arg);
 		cmd->arg = ft_split(lines, ' ');
+		free (lines);
 	}
 }
 

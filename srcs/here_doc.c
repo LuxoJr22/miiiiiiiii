@@ -6,7 +6,7 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 13:29:31 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/16 19:49:55 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:35:20 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,7 @@ char	*modif(char *str, char **envp)
 		i ++;
 	}
 	line[j] = '\0';
-	//free (str);
-	//free (line);
+	free (str);
 	return (line);
 }
 
@@ -107,6 +106,7 @@ int	create_infile(char *limiter, char **envp)
 	write (fd_hd[1], line, ft_strlen(line));
 	free(str);
 	free (line);
+	free (limiter);
 	in_fd = dup(fd_hd[0]);
 	close(fd_hd[0]);
 	close(fd_hd[1]);

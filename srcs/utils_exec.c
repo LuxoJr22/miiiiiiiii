@@ -6,7 +6,7 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:33:52 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/29 16:45:25 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:21:33 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	exec_cmd(t_cmd *cmd, char **envp, char *line)
 			dup2(cmd->out, STDOUT_FILENO);
 		if (!cmd->here_doc)
 			status = execve(cmd->name, cmd->arg, envp);
-		if (cmd->here_doc && !cmd->file->fd_file)
+		if ((cmd->here_doc && !cmd->file->fd_file) || (cmd->here_doc && cmd->file->type == 1))
 			exit (0);
 		if (status == -1)
 		{

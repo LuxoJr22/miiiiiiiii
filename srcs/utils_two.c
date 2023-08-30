@@ -6,7 +6,7 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:59:54 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/29 14:23:09 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:08:22 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_union(char	**str)
 				len ++;
 		}
 		else
-			ret = ft_strjoin_f(ft_strjoin_f(ret, str[len], 4), " ", 4);
+			ret = ft_strjoin_f(ft_strjoin_f(ret, str[len], 1), " ", 1);
 		len ++;
 	}
 	return (ret);

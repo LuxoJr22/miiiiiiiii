@@ -6,7 +6,7 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:15:18 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/16 16:17:52 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:07:16 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	size_alloc(char *str, char **envp)
 			size ++;
 		i ++;
 	}
+	if (word)
+		free (word);
 	return (size + 1);
 }
 
@@ -67,6 +69,7 @@ int	add_var_env(char *var, char **envp, char *line)
 		i ++;
 		y ++;
 	}
+	free (content);
 	return (i);
 }
 
