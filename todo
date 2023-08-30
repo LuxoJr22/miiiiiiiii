@@ -3,6 +3,6 @@ chdir protect
 command + heredoc
 redir cat<file
 pipe seul en fin de ligne 
-here_doc quitte le prog avec ctrl\d
+here_doc quitte le prog avec ctrl\d, sur bash avec ctrl/d <<a cat affiche ce qui a un \n avant le ctrl\d
 manque exit quand prompt vide avec ctrl\d
 here_doc sans nom ne quitte pas le processus

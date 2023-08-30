@@ -6,7 +6,7 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 13:29:31 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/30 17:35:20 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/30 18:52:30 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ char	*modif(char *str, char **envp)
 			word = dup_name_var(i, str, word);
 			i = strlen_name_var(i, str);
 			j = add_var_env(word, envp, line);
-			free (word);
 		}
 		line[j] = str[i];
 		j ++;
