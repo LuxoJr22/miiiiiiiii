@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 17:50:17 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/31 17:13:58 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/08/31 19:06:17 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	get_commands(char *line, t_cmd *cmd, char **envp)
 		cmd->here_doc = 0;
 		call_parsing_redir(cmd, lines, line);
 		pre_process(cmd->arg, envp);
-		cmd->name = ft_strdup(acces_cmd(envp, cmd->arg[0]));
+		cmd->name = acces_cmd(envp, cmd->arg[0]);
 		if (cmds[i + 1])
 		{
 			cmd->next = malloc(sizeof(t_cmd));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:33:52 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/30 17:21:33 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:06:50 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*acces_cmd(char **envp, char *cmd)
 	i = -1;
 	(void)envp;
 	if (!access(cmd, F_OK) && ft_strchr(cmd, '/'))
-		return (cmd);
+		return (ft_strdup(cmd));
 	path = ft_split(getenv("PATH"), ':');
 	while (path[++i])
 		path[i] = ft_strjoin_f(path[i], ft_strdup("/"), 3);
@@ -56,7 +56,7 @@ char	*acces_cmd(char **envp, char *cmd)
 		free (tmp_path);
 	}
 	free_dptr(path);
-	return (cmd);
+	return (ft_strdup(cmd));
 }
 
 void	exec_cmd(t_cmd *cmd, char **envp, char *line)

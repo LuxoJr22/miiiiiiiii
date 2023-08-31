@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:15:18 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/31 16:08:23 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/08/31 19:28:08 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ int	size_alloc(char *str, char **envp)
 			size += count_size(size, content);
 			if (content)
 				free(content);
+			if (word && word[0])
+				free (word);
 		}
 		else if (str[i] != '\n' && str[i] != '\0')
 			size ++;
 		i ++;
 	}
-	if (word && word[0])
-		free (word);
 	return (size + 1);
 }
 

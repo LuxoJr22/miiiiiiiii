@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:59:54 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/31 17:14:50 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/08/31 19:36:58 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,21 @@ char	*ft_union(char	**str)
 void	free_list(t_cmd *cmd)
 {
 	t_cmd	*tmp;
-	//t_file	*tp;
+	t_file	*tp;
 
 	tmp = NULL;
-	//tp = NULL;
+	tp = NULL;
 	while (cmd)
 	{
 		tmp = cmd->next;
-		/*while (cmd->file)
+		while (cmd->file)
 		{
 			tp = cmd->file->next;
 			if (cmd->file->fd_file && cmd->file->fd_file[0] != '\0')
 				free(cmd->file->fd_file);
 			free(cmd->file);
 			cmd->file = tp;
-		}*/
+		}
 		if (cmd->arg && cmd->arg[0] && cmd->arg[0][0] != '\0')
 			free_dptr(cmd->arg);
 		if (cmd->name && cmd->name[0])

@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 13:29:31 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/31 15:57:47 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/08/31 19:37:25 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	create_infile(char *limiter, char **envp)
 	int		in_fd;
 
 	str = ft_calloc(1, 1);
-	limiter = ft_strjoin_f(limiter, ft_strdup("\n"), 3);
+	limiter = ft_strjoin_f(limiter, ft_strdup("\n"), 2);
 	line = NULL;
 	if (pipe(fd_hd) == -1)
 		perror("Minishell: HereDoc: ");
