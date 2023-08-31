@@ -9,7 +9,8 @@ CFLAGS += -Iincludes
 NAME = minishell
 NAME_BONUS =
 RM = rm -f
-LIBS = -Llibft -lft -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include/readline/
+LIBS = -Llibft -lft $(READLINE)
+READLINE = -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include/readline/
 
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
@@ -17,7 +18,7 @@ OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 .c.o:
 		$(CC) $(CFLAGS) -c $< -o $@
 
-all:	$(NAME)
+all:	check_brew check_readline $(NAME)
 
 $(NAME):	$(OBJS)
 			make -C libft
@@ -31,6 +32,20 @@ $(NAME_BONUS):	$(OBJS_BONUS)
 
 debug: CFLAGS+=-g
 debug: re
+
+check_brew:
+	@if test ! $$(which brew); then \
+	    echo "Brew is not installed. Installing now..."; \
+	    /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"; \
+	fi
+	@echo "Brew OK"
+
+check_readline:
+	@if test -z "$$(brew list | grep readline)"; then \
+	    echo "Readline is not installed. Installing now..."; \
+	    brew install readline; \
+	fi
+	@echo "Readline OK"
 
 clean:
 		$(RM) $(OBJS) $(OBJS_BONUS)
