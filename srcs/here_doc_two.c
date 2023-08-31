@@ -6,7 +6,7 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:15:18 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/30 18:57:49 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:20:17 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	add_var_env(char *var, char **envp, char *line)
 	y = 0;
 	i = ft_strlen(line);
 	content = ft_strmup(ft_getenv(envp, var));
-	ft_putstr_fd(content, 2);
 	if (content == NULL)
 	{
 		line[i] = '\n';
@@ -82,7 +81,5 @@ int	is_good_name_var(char *str, int i)
 			|| (str[i - 1] != 34 && ft_isalnum(str[i + 1])) 
 				|| (str[i - 1] != 39 && ft_isalnum(str[i + 1]))))
 		return (1);
-	//else if (str[i] == '$' && !str[i - 1] && ((str[i + 1] != 34) || (str[i + 1] != 39) || (ft_isalnum(str[i + 1])) || (ft_isalnum(str[i + 1]))))
-	//	return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 13:29:31 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/30 18:52:30 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:46:36 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ char	*read_input(char *limiter, char *str, char *line)
 		write (1, "> ", 2);
 		line = get_next_line(0);
 		if (!ft_strcmp(line, limiter))
+		{
+			free (line);
+			line = NULL;
 			return (str);
+		}
 		str = ft_strjoin_f(str, line, 3);
 	}
 }
@@ -67,7 +71,7 @@ char	*modif(char *str, char **envp)
 
 	i = 0;
 	j = 0;
-	line = malloc(sizeof(char) * size_alloc(str, envp));
+	line = ft_calloc(size_alloc(str, envp), sizeof(char));
 	word = NULL;
 	while (str[i])
 	{
@@ -99,7 +103,7 @@ int	create_infile(char *limiter, char **envp)
 	if (pipe(fd_hd) == -1)
 		perror("Minishell: HereDoc: ");
 	str = read_input(limiter, str, line);
-	free (line);
+	//free (line);
 	str = ft_strjoin_f(str, ft_strdup("\0"), 3);
 	line = modif(ft_strdup(str), envp);
 	write (fd_hd[1], line, ft_strlen(line));
