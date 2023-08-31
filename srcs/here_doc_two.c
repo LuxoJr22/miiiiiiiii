@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc_two.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:15:18 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/31 14:20:17 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:08:23 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	size_alloc(char *str, char **envp)
 	i = 0;
 	size = 0;
 	content = NULL;
+	word = NULL;
 	while (str[i])
 	{
 		if (is_good_name_var(str, i))
@@ -39,6 +40,8 @@ int	size_alloc(char *str, char **envp)
 			i += ft_strlen (word);
 			content = ft_getenv(envp, word);
 			size += count_size(size, content);
+			if (content)
+				free(content);
 		}
 		else if (str[i] != '\n' && str[i] != '\0')
 			size ++;
@@ -57,7 +60,7 @@ int	add_var_env(char *var, char **envp, char *line)
 
 	y = 0;
 	i = ft_strlen(line);
-	content = ft_strmup(ft_getenv(envp, var));
+	content = ft_getenv(envp, var);
 	if (content == NULL)
 	{
 		line[i] = '\n';
@@ -69,8 +72,7 @@ int	add_var_env(char *var, char **envp, char *line)
 		i ++;
 		y ++;
 	}
-	if (content && content[0])
-		free (content);
+	free (content);
 	return (i);
 }
 

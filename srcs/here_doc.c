@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 13:29:31 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/31 14:46:36 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:57:47 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ char	*modif(char *str, char **envp)
 			word = dup_name_var(i, str, word);
 			i = strlen_name_var(i, str);
 			j = add_var_env(word, envp, line);
+			if (word[0])
+				free(word);
 		}
 		line[j] = str[i];
 		j ++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_redirec_two.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 03:39:38 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/31 14:49:30 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:31:27 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 void	parsing_en_here_doc(t_cmd *cmd, t_file *file, int coor[2])
 {
-	char **tmp;
+	char	**tmp;
 
 	tmp = ft_split(cmd->arg[coor[0]], '<');
 	file->type = 3;
 	coor[1]++;
 	if (ft_strlen(cmd->arg[coor[0]]) > 2)
-		file->fd_file = tmp[0];
+		file->fd_file = ft_strdup(tmp[0]);
 	else
 		file->fd_file = ft_strdup(cmd->arg[coor[0] + 1]);
 	file->fd_file = reset_quote(file->fd_file);
-	//free_dptr(tmp); // source de leaks
+	if (tmp && tmp[0] && tmp[0][0])
+		free_dptr(tmp);
 }
 
 void	parsing_en(t_cmd *cmd, t_file *file, int coor[2])
