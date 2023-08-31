@@ -6,7 +6,7 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 08:15:45 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/31 14:03:42 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:44:30 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,6 @@ t_file	*init_tfile(char *line)
 
 void	call_parsing_redir(t_cmd *cmd, char *lines, char *line)
 {
-	// if (cmd->arg[0][0] == '<' && cmd->arg[0][1] == '<' && !cmd->arg[0][2])
-	// {
-	// 	printf ("Minishell: syntax error near unexpected token `newline'\n");
-	// 	cmd->here_doc = 1;
-	// 	return ;
-	// }
 	if (find_name(cmd->arg, 1) != -1 || find_name(cmd->arg, 2) != -1)
 	{
 		manage_redirec(cmd, line);

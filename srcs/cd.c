@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:42:38 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/16 17:40:07 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/08/31 19:52:16 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,25 @@ void	go_home(char	**envp)
 	return ;
 }
 
+int	ft_cds(char *envp, char *path)
+{
+	if (path == NULL)
+	{
+		go_home(envp);
+		return (1);
+	}
+	if ((path[0] == 34 || path[0] == 39) && !path[1])
+		return (1);
+	return (0);
+}
+
 void	ft_cd(char *path, char **envp)
 {
 	DIR		*i;
 	int		y;
 	char	*ret;
 
-	if (path == NULL)
-	{
-		go_home(envp);
-		return ;
-	}
-	if ((path[0] == 34 || path[0] == 39) && !path[1])
+	if (ft_cds(envp, path))
 		return ;
 	i = opendir(path);
 	if (i == NULL)
