@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:42:38 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/31 19:52:16 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:57:28 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	go_home(char	**envp)
 	return ;
 }
 
-int	ft_cds(char *envp, char *path)
+int	ft_cds(char **envp, char *path)
 {
 	if (path == NULL)
 	{

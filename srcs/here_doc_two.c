@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:15:18 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/31 19:28:08 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/01 16:06:35 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ int	count_size(int size, char *content)
 	else
 		size += ft_strlen(content);
 	return (size);
+}
+
+void	free_size_alloc(char *word, char *content)
+{
+	if (content)
+		free(content);
+	if (word && word[0])
+		free (word);
 }
 
 int	size_alloc(char *str, char **envp)
@@ -40,10 +48,7 @@ int	size_alloc(char *str, char **envp)
 			i += ft_strlen (word);
 			content = ft_getenv(envp, word);
 			size += count_size(size, content);
-			if (content)
-				free(content);
-			if (word && word[0])
-				free (word);
+			free_size_alloc(word, content);
 		}
 		else if (str[i] != '\n' && str[i] != '\0')
 			size ++;
@@ -79,9 +84,9 @@ int	add_var_env(char *var, char **envp, char *line)
 int	is_good_name_var(char *str, int i)
 {
 	if (str[i] == '$' && ((str[i - 1] == 34 && str[i + 1] != 34)
-		|| (str[i - 1] == 39 && str[i + 1] != 39) 
-			|| (str[i - 1] != 34 && ft_isalnum(str[i + 1])) 
-				|| (str[i - 1] != 39 && ft_isalnum(str[i + 1]))))
+			|| (str[i - 1] == 39 && str[i + 1] != 39)
+			|| (str[i - 1] != 34 && ft_isalnum(str[i + 1]))
+			|| (str[i - 1] != 39 && ft_isalnum(str[i + 1]))))
 		return (1);
 	return (0);
 }

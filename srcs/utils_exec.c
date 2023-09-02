@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:33:52 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/31 19:06:50 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/01 16:09:14 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,16 @@ char	*acces_cmd(char **envp, char *cmd)
 	return (ft_strdup(cmd));
 }
 
+void	failed_exec(char *tmp, t_cmd *cmd)
+{
+	tmp = ft_strjoin_f(ft_strjoin_f("Minishell: ",
+				cmd->arg[0], 4), ": command not found\n", 1);
+	ft_putstr_fd(tmp, 2);
+	free(tmp);
+	g_glob = 127;
+	exit(1);
+}
+
 void	exec_cmd(t_cmd *cmd, char **envp, char *line)
 {
 	pid_t	pid;
@@ -79,16 +89,10 @@ void	exec_cmd(t_cmd *cmd, char **envp, char *line)
 			dup2(cmd->out, STDOUT_FILENO);
 		if (!cmd->here_doc)
 			status = execve(cmd->name, cmd->arg, envp);
-		if ((cmd->here_doc && !cmd->file->fd_file) || (cmd->here_doc && cmd->file->type == 1))
+		if ((cmd->here_doc && !cmd->file->fd_file)
+			|| (cmd->here_doc && cmd->file->type == 1))
 			exit (0);
 		if (status == -1)
-		{
-			tmp = ft_strjoin_f(ft_strjoin_f("Minishell: ",
-				cmd->arg[0], 4), ": command not found\n", 1);
-			ft_putstr_fd(tmp, 2);
-			free(tmp);
-			g_glob = 127;
-			exit(1);
-		}
+			failed_exec(tmp, cmd);
 	}
 }

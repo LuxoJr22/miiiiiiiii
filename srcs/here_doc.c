@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 13:29:31 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/31 19:37:25 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/01 16:11:47 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	strlen_name_var(int i, char *str)
 
 	i ++;
 	k = i;
-	while (str[k] != ' ' && str[k] 
+	while (str[k] != ' ' && str[k]
 		&& str[k] != '\n' && str[k] != 34 && str[k] != 39)
 		k ++;
 	return (k);
@@ -46,12 +46,12 @@ char	*dup_name_var(int i, char *str, char *word)
 
 	i ++;
 	k = i;
-	while (str[k] != ' ' && str[k] 
+	while (str[k] != ' ' && str[k]
 		&& str[k] != '\n' && str[k] != 34 && str[k] != 39)
 		k ++;
 	word = malloc(sizeof(char) * (k + 1));
 	k = 0;
-	while (str[i] != ' ' && str[i] 
+	while (str[i] != ' ' && str[i]
 		&& str[i] != '\n' && str[i] != 34 && str[i] != 39)
 	{
 		word[k] = str[i];
@@ -83,9 +83,7 @@ char	*modif(char *str, char **envp)
 			if (word[0])
 				free(word);
 		}
-		line[j] = str[i];
-		j ++;
-		i ++;
+		line[j++] = str[i++];
 	}
 	line[j] = '\0';
 	free (str);
@@ -105,7 +103,6 @@ int	create_infile(char *limiter, char **envp)
 	if (pipe(fd_hd) == -1)
 		perror("Minishell: HereDoc: ");
 	str = read_input(limiter, str, line);
-	//free (line);
 	str = ft_strjoin_f(str, ft_strdup("\0"), 3);
 	line = modif(ft_strdup(str), envp);
 	write (fd_hd[1], line, ft_strlen(line));

@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/08/31 19:20:28 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/01 17:01:38 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,27 @@ int	is_in_quote(char *str, char c)
 	return (it);
 }
 
+char	*get_line_env(char *str, char *ret, char **envp)
+{
+	if (str[0] == '$' && ret[0] == '?')
+	{
+		free(str);
+		str = ft_strjoin_f((ft_itoa(g_glob)),
+				ft_substr(ret, 1, ft_strlen(ret) - 1), 3);
+	}
+	else if (str[0] == '$')
+	{
+		free(str);
+		str = ft_getenv(envp, ret);
+	}
+	else
+	{
+		free(str);
+		str = ft_strmup(ret);
+	}
+	return (str);
+}
+
 char	**pre_process(char **str, char **envp)
 {
 	int		i;
@@ -123,26 +144,7 @@ char	**pre_process(char **str, char **envp)
 		{
 			str[i] = reset_quote(str[i]);
 			ret = ft_split(str[i], '$');
-			if (str[i][0] == '$' && ret[0][0] == '?')
-			{
-				free(str[i]);
-				str[i] = ft_strjoin_f((ft_itoa(g_glob)), ft_substr(ret[0], 1, ft_strlen(ret[0]) - 1), 3);
-			}
-			/*if (str[i][0] == '$' && (ret[0][0] > '0' && ret[0][0] < '9'))
-			{
-				if (argc >= ret[0][0] - 48)
-					str[i] = ft_strjoin((ft_substr(argv[ret[0][0] - 48])), ft_substr(ret[0], 1, ft_strlen(ret[0]) - 1));
-			}*/
-			else if (str[i][0] == '$')
-			{
-				free(str[i]);
-				str[i] = ft_getenv(envp, ret[0]);
-			}
-			else
-			{
-				free(str[i]);
-				str[i] = ft_strmup(ret[0]);
-			}
+			str[i] = get_line_env(str[i], ret[0], envp);
 			while (ret[y++])
 				str[i] = ft_strjoin_f(str[i], ft_getenv(envp, ret[y]), 3);
 			y = 1;
@@ -154,26 +156,33 @@ char	**pre_process(char **str, char **envp)
 	return (NULL);
 }
 
-int	main(int ac, char **av, char **envp)
+char	**init_env(char **envp)
 {
-	char		*oui;
-	t_cmd		*cmd;
-	char		**envn;
-	int			i;
+	char	**envn;
+	int		i;
 
-	(void) ac;
-	(void) av;
 	i = -1;
 	envn = malloc(sizeof(char *) * size_dptr(envp) + 1);
 	while (envp[++i])
 		envn[i] = ft_strdup(envp[i]);
 	envn[i + 1] = 0;
+	return (envn);
+}
+
+int	main(int ac, char **av, char **envp)
+{
+	char		*oui;
+	t_cmd		*cmd;
+	char		**envn;
+
+	(void) ac;
+	(void) av;
+	envn = init_env(envp);
 	cmd = NULL;
 	oui = getcwd(NULL, 0);
 	signal(SIGINT, interrupt);
 	while (oui != 0)
 	{
-		//g_glob = errno;
 		free(oui);
 		oui = readline("Minishell>");
 		if (oui && *oui)
@@ -182,9 +191,6 @@ int	main(int ac, char **av, char **envp)
 			cmd = parsed_line(oui, envn);
 			manage_exec(oui, envn, cmd);
 			free_list(cmd);
-			//free_dptr(cmd->arg);
-
-			//free(cmd);
 		}
 	}
 	return (0);
