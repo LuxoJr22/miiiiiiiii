@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/16 18:38:19 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/06 17:33:01 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,7 @@ int		size_alloc(char *str, char **envp);
 int		is_good_name_var(char *str, int i);
 char	*dup_name_var(int i, char *str, char *word);
 char	*free_dptr_line(char **dptr, char *str);
+int		is_in_quote(char *str, char c);
+int		built_in(char *command, t_cmd *cmd, char **envp);
 
 #endif

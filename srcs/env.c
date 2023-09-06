@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 19:28:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/01 17:04:23 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/06 17:25:18 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,11 @@ char	*ft_getenv(char **envp, char *str)
 				line[1] = ft_strjoin_f(ft_strjoin_f(line[1], "=", 1),
 						line[o++], 1);
 		}
-		printf("oui\n");
 		if (!ft_strncmp(line[0], str, ft_strlen(line[0]))
 			&& !ft_strncmp(line[0], str, ft_strlen(str)))
 			return (free_dptr_line(line, line[1]));
-		printf("oui\n");
 		if (line && line[0] && line[0][0])
 			free_dptr(line);
 	}
-	printf("oui\n");
 	return (0);
 }

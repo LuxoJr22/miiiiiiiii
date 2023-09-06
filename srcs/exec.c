@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 12:07:17 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/31 20:01:42 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/06 17:32:21 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,32 @@ void	manage_exec(char *line, char **envp, t_cmd *cmd)
 		manage_pipe(cmd, envp, line);
 	else
 		get_command(cmd, envp, line);
+}
+
+void	get_command(t_cmd *cmd, char **envp, char *line)
+{
+	char	*command;
+	int		stdin_me;
+	int		stdout_me;
+	int		boolean;
+
+	command = NULL;
+	if (cmd->arg[0] != NULL)
+		command = str_lower(cmd->arg[0]);
+	stdin_me = dup(STDIN_FILENO);
+	stdout_me = dup(STDOUT_FILENO);
+	if (cmd->in && cmd->in != -1)
+		dup2(cmd->in, STDIN_FILENO);
+	if (cmd->out && cmd->out != -1)
+		dup2(cmd->out, STDOUT_FILENO);
+	boolean = built_in(command, cmd, envp);
+	dup2(stdin_me, 0);
+	dup2(stdout_me, 1);
+	if (!boolean)
+	{
+		exec_cmd(cmd, envp, line);
+		if (!count_pipe(line) || command == NULL)
+			waitpid(-1, NULL, 0);
+	}
+	free(command);
 }

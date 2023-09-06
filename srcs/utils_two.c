@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:59:54 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/31 19:36:58 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/06 17:27:35 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,52 @@ int	size_dptr(char **str)
 	while (str[i])
 		i++;
 	return (i);
+}
+
+char	*ft_strmup(const char *s1)
+{
+	int		i;
+	int		len;
+	char	*ret;
+
+	i = 0;
+	if (!s1)
+	{
+		ret = malloc(sizeof(char));
+		ret[0] = '\0';
+		return (ret);
+	}
+	len = ft_strlen(s1);
+	ret = malloc(sizeof(char) * len + 1);
+	if (ret == 0)
+		return (0);
+	while (i < len)
+	{
+		ret[i] = s1[i];
+		i ++;
+	}
+	ret[i] = '\0';
+	return (ret);
+}
+
+int	is_in_quote(char *str, char c)
+{
+	int	i;
+	int	it;
+	int	quote;
+
+	i = 0;
+	it = 0;
+	quote = 0;
+	while (str[i])
+	{
+		if (str[i] == 34 || str[i] == 39)
+			quote = str[i];
+		else if (str[i] == quote)
+			quote = 0;
+		if (str[i] == c && quote != 39)
+			it ++;
+		i ++;
+	}
+	return (it);
 }

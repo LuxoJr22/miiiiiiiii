@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/01 17:01:38 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/06 17:32:06 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,82 +31,6 @@ int	built_in(char *command, t_cmd *cmd, char **envp)
 	else
 		return (0);
 	return (1);
-}
-
-void	get_command(t_cmd *cmd, char **envp, char *line)
-{
-	char	*command;
-	int		stdin_me;
-	int		stdout_me;
-	int		boolean;
-
-	command = NULL;
-	if (cmd->arg[0] != NULL)
-		command = str_lower(cmd->arg[0]);
-	stdin_me = dup(STDIN_FILENO);
-	stdout_me = dup(STDOUT_FILENO);
-	if (cmd->in && cmd->in != -1)
-		dup2(cmd->in, STDIN_FILENO);
-	if (cmd->out && cmd->out != -1)
-		dup2(cmd->out, STDOUT_FILENO);
-	boolean = built_in(command, cmd, envp);
-	dup2(stdin_me, 0);
-	dup2(stdout_me, 1);
-	if (!boolean)
-	{
-		exec_cmd(cmd, envp, line);
-		if (!count_pipe(line) || command == NULL)
-			waitpid(-1, NULL, 0);
-	}
-	free(command);
-}
-
-char	*ft_strmup(const char *s1)
-{
-	int		i;
-	int		len;
-	char	*ret;
-
-	i = 0;
-	if (!s1)
-	{
-		ret = malloc(sizeof(char));
-		ret[0] = '\0';
-		return (ret);
-	}
-	len = ft_strlen(s1);
-	ret = malloc(sizeof(char) * len + 1);
-	if (ret == 0)
-		return (0);
-	while (i < len)
-	{
-		ret[i] = s1[i];
-		i ++;
-	}
-	ret[i] = '\0';
-	return (ret);
-}
-
-int	is_in_quote(char *str, char c)
-{
-	int	i;
-	int	it;
-	int	quote;
-
-	i = 0;
-	it = 0;
-	quote = 0;
-	while (str[i])
-	{
-		if (str[i] == 34 || str[i] == 39)
-			quote = str[i];
-		else if (str[i] == quote)
-			quote = 0;
-		if (str[i] == c && quote != 39)
-			it ++;
-		i ++;
-	}
-	return (it);
 }
 
 char	*get_line_env(char *str, char *ret, char **envp)
