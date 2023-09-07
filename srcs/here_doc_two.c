@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc_two.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:15:18 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/01 16:06:35 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/07 16:45:12 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	add_var_env(char *var, char **envp, char *line)
 
 int	is_good_name_var(char *str, int i)
 {
-	if (str[i] == '$' && ((str[i - 1] == 34 && str[i + 1] != 34)
+	if (str[i + 1] == '$' && ((str[i - 1] == 34 && str[i + 1] != 34)
 			|| (str[i - 1] == 39 && str[i + 1] != 39)
 			|| (str[i - 1] != 34 && ft_isalnum(str[i + 1]))
 			|| (str[i - 1] != 39 && ft_isalnum(str[i + 1]))))
