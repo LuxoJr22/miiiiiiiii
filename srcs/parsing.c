@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 17:50:17 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/31 19:06:17 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/07 16:10:40 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	reset_quote_two(int quote, char *str, char	*ret)
 			quote = 0;
 			i ++;
 		}
-		ret[j] = str[i];
-		if (str[i])
+		else if (str[i])
 		{
+			ret[j] = str[i];
 			i ++;
 			j ++;
 		}
