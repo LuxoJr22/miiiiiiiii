@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:57:20 by sforesti          #+#    #+#             */
-/*   Updated: 2023/07/06 14:49:04 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/07 19:05:47 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,11 @@ int	redirection_enter(t_cmd *cmd)
 
 int	exec_pipe(t_cmd *cmd, char **envp, char *line)
 {
-	pid_t	pid;
-
 	if (cmd->next)
 		if (pipe(cmd->fd) == -1)
 			return (-1);
-	pid = fork();
-	if (pid == 0)
+	g_pid = fork();
+	if (g_pid == 0)
 	{
 		if (cmd->next)
 			redirection_exit(cmd);

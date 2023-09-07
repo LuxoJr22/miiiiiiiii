@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/07 17:25:51 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/07 19:24:03 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*get_line_env(char *str, char *ret, char **envp)
 	if (str[0] == '$' && ret[0] == '?')
 	{
 		free(str);
-		str = ft_strjoin_f((ft_itoa(g_glob)),
+		str = ft_strjoin_f((ft_itoa(errno)),
 				ft_substr(ret, 1, ft_strlen(ret) - 1), 3);
 	}
 	else if (str[0] == '$')
@@ -101,10 +101,11 @@ int	main(int ac, char **av, char **envp)
 
 	(void) ac;
 	(void) av;
+	g_pid = -1;
+	ft_init_signals();
 	envn = init_env(envp);
 	cmd = NULL;
 	oui = getcwd(NULL, 0);
-	signal(SIGINT, interrupt);
 	while (oui != 0)
 	{
 		free(oui);
@@ -117,5 +118,6 @@ int	main(int ac, char **av, char **envp)
 			free_list(cmd);
 		}
 	}
+	write(1, "exit\n", 5);
 	return (0);
 }

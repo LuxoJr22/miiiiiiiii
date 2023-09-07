@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 12:07:17 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/06 17:32:21 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/07 19:30:29 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,16 @@ void	manage_exec(char *line, char **envp, t_cmd *cmd)
 	if (verif(line) == -1)
 	{
 		printf ("Minishell: syntax error near unexpected token `|'\n");
-		g_glob = 258;
 		return ;
 	}
 	if (verif(line) == -2)
 	{
 		printf ("Minishell: syntax error near unexpected token `>'\n");
-		g_glob = 258;
 		return ;
 	}
 	if (verif(line) == -3)
 	{
 		printf ("Minishell: syntax error near unexpected token `<'\n");
-		g_glob = 258;
 		return ;
 	}
 	if (cmd->next)
@@ -102,5 +99,6 @@ void	get_command(t_cmd *cmd, char **envp, char *line)
 		if (!count_pipe(line) || command == NULL)
 			waitpid(-1, NULL, 0);
 	}
+	g_pid = -1;
 	free(command);
 }

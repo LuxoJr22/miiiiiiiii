@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 20:16:02 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/31 20:02:34 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/07 18:46:45 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	open_files_enter(t_cmd *cmd, t_file *file, char **envp)
 		if (fd == -1)
 		{
 			perror(ft_strjoin_f("Minishell: ", file->fd_file, 4));
-			g_glob = 1;
 			cmd->here_doc = 1;
 		}
 	}
@@ -33,7 +32,6 @@ int	open_files_enter(t_cmd *cmd, t_file *file, char **envp)
 		if (fd == -1)
 		{
 			perror(ft_strjoin_f("Minishell: ", file->fd_file, 4));
-			g_glob = 1;
 			cmd->here_doc = 1;
 		}
 	}
@@ -51,7 +49,6 @@ int	open_files_exit(t_cmd *cmd, t_file *file)
 		if (fd == -1)
 		{
 			perror(ft_strjoin_f("Minishell: ", file->fd_file, 4));
-			g_glob = 1;
 			cmd->here_doc = 1;
 		}
 	}
@@ -61,7 +58,6 @@ int	open_files_exit(t_cmd *cmd, t_file *file)
 		if (fd == -1)
 		{
 			perror(ft_strjoin_f("Minishell: ", file->fd_file, 4));
-			g_glob = 1;
 			cmd->here_doc = 1;
 		}
 	}

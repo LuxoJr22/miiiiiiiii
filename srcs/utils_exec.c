@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:33:52 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/07 17:18:26 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/07 19:05:48 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,24 +65,21 @@ void	failed_exec(char *tmp, t_cmd *cmd)
 				cmd->arg[0], 4), ": command not found\n", 1);
 	ft_putstr_fd(tmp, 2);
 	free(tmp);
-	g_glob = 127;
 	exit(1);
 }
 
 void	exec_cmd(t_cmd *cmd, char **envp, char *line)
 {
-	pid_t	pid;
 	int		status;
 	char	*tmp;
 
-	pid = 0;
+	g_pid = 0;
 	tmp = NULL;
 	if (!count_pipe(line) || !cmd->arg[0])
-		pid = fork();
+		g_pid = fork();
 	status = 0;
-	if (pid == 0)
+	if (g_pid == 0)
 	{
-		g_glob = 1;
 		if (cmd->in && cmd->in != -1)
 			dup2(cmd->in, STDIN_FILENO);
 		if (cmd->out && cmd->out != -1)
