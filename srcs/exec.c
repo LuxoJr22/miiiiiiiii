@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 12:07:17 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/11 18:07:36 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/11 18:32:14 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	verif(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if ((line[i] == '|' && line[i + 1] == '|'))
+		if (line[i] == '|' && line[i + 1] == '|')
 			return (-1);
 		if (line[i] == '>' && line[i + 1] == '>' && line[i + 2] == '>')
 			return (-2);
