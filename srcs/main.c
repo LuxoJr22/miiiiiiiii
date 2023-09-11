@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/11 12:51:50 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/11 17:53:56 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ int	built_in(char *command, t_cmd *cmd, char **envp)
 
 char	*get_line_env(char *str, char *ret, char **envp)
 {
-	if (str[0] == '$' && ret[0] == '?')
+	/*if (str[0] == '$' && ret[0] == '?')
 	{
 		free(str);
-		str = ft_strjoin_f((ft_itoa(errno)),
+		str = ft_strjoin_f((ft_getenv(envp, "?")),
 				ft_substr(ret, 1, ft_strlen(ret) - 1), 3);
-	}
-	else if (str[0] == '$')
+	}*/
+	if (str[0] == '$')
 	{
 		free(str);
 		str = ft_getenv(envp, ret);
@@ -86,9 +86,10 @@ char	**init_env(char **envp)
 	int		i;
 
 	i = -1;
-	envn = malloc(sizeof(char *) * size_dptr(envp) + 1);
+	envn = malloc(sizeof(char *) * (size_dptr(envp) + 2));
 	while (envp[++i])
 		envn[i] = ft_strdup(envp[i]);
+	envn[i] = ft_strdup("?=0");
 	envn[i + 1] = 0;
 	return (envn);
 }
@@ -117,6 +118,8 @@ int	main(int ac, char **av, char **envp)
 			manage_exec(oui, envn, cmd);
 			free_list(cmd);
 		}
+		else
+			change_env(envn, "?=0");
 	}
 	free_dptr(envn);
 	write(1, "exit\n", 5);

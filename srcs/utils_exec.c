@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:33:52 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/07 19:05:48 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/11 17:49:56 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,10 @@ char	*acces_cmd(char **envp, char *cmd)
 	return (ft_strdup(cmd));
 }
 
-void	failed_exec(char *tmp, t_cmd *cmd)
+void	failed_exec(char *tmp, t_cmd *cmd, int fd[2])
 {
+	write(fd[1], "?=127", 6);
+	close(fd[1]);
 	tmp = ft_strjoin_f(ft_strjoin_f("Minishell: ",
 				cmd->arg[0], 4), ": command not found\n", 1);
 	ft_putstr_fd(tmp, 2);
@@ -68,13 +70,27 @@ void	failed_exec(char *tmp, t_cmd *cmd)
 	exit(1);
 }
 
+void	get_line(char **envp, int fd)
+{
+	char	buf[6];
+	int		i;
+
+	i = read(fd, buf, 6);
+	if (i == -1)
+		return;
+	change_env(envp, buf);
+}
+
 void	exec_cmd(t_cmd *cmd, char **envp, char *line)
 {
 	int		status;
 	char	*tmp;
+	int		fd[2];
 
 	g_pid = 0;
 	tmp = NULL;
+	if (pipe(fd) == -1)
+		return ;
 	if (!count_pipe(line) || !cmd->arg[0])
 		g_pid = fork();
 	status = 0;
@@ -90,6 +106,12 @@ void	exec_cmd(t_cmd *cmd, char **envp, char *line)
 			|| (cmd->here_doc && cmd->file->type == 1))
 			exit (0);
 		if (status == -1)
-			failed_exec(tmp, cmd);
+			failed_exec(tmp, cmd, fd);
+	}
+	else
+	{
+		close(fd[1]);
+		wait(NULL);
+		get_line(envp, fd[0]);
 	}
 }

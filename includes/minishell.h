@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/11 12:59:11 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/11 16:20:39 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,6 @@ int		built_in(char *command, t_cmd *cmd, char **envp);
 void	ft_init_signals(void);
 void	verif_limiter(char *line, char *limiter);
 char	*fd_to_str(int fd[2]);
+void	change_env(char **envp, char *str);
 
 #endif
