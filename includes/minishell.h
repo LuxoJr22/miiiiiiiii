@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/07 19:05:06 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/11 12:59:11 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_cmd {
 	struct s_cmd	*next;
 }				t_cmd;
 
-pid_t g_pid;
+pid_t	g_pid;
 
 void	ft_echo(char **str);
 void	ft_env(char **envp);
@@ -111,6 +111,8 @@ char	*dup_name_var(int i, char *str, char *word);
 char	*free_dptr_line(char **dptr, char *str);
 int		is_in_quote(char *str, char c);
 int		built_in(char *command, t_cmd *cmd, char **envp);
-void    ft_init_signals(void);
+void	ft_init_signals(void);
+void	verif_limiter(char *line, char *limiter);
+char	*fd_to_str(int fd[2]);
 
 #endif

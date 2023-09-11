@@ -5,4 +5,11 @@ redir cat<file
 pipe seul en fin de ligne 
 here_doc quitte le prog avec ctrl\d, sur bash avec ctrl/d <<a cat affiche ce qui a un \n avant le ctrl\d
 manque exit quand prompt vide avec ctrl\d
-here_doc sans nom ne quitte pas le processus
+here_doc sans nom ne quitte pas le proces
+
+==========================================================================================================
+
+HereDoc : 
+- ctrl\d sans premier '\n' ne marche pas bien
+- var env marche pas 
+- leaks init_env avec here doc

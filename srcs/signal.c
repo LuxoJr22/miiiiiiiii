@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:51:49 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/07 19:29:16 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/11 13:01:19 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    ft_handle_ctrl_slash(int signal)
+void	ft_handle_ctrl_slash(int signal)
 {
 	(void)signal;
 	if (g_pid > 0)
@@ -24,7 +24,7 @@ void    ft_handle_ctrl_slash(int signal)
 	}
 }
 
-void    ft_handle_ctrlc(int signal)
+void	ft_handle_ctrlc(int signal)
 {
 	(void)signal;
 	if (g_pid < 0)
@@ -48,9 +48,9 @@ void    ft_handle_ctrlc(int signal)
 	}
 }
 
-void    ft_init_signals(void)
+void	ft_init_signals(void)
 {
-	struct termios    new;
+	struct termios	new;
 
 	tcgetattr(0, &new);
 	new.c_lflag &= ~ECHOCTL;

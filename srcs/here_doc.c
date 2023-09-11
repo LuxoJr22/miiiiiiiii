@@ -6,26 +6,37 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 13:29:31 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/07 17:28:28 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/11 13:03:05 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*read_input(char *limiter, char *str, char *line)
+char	*read_input(char *limiter, char *line)
 {
-	while (1)
+	int	fd[2];
+
+	if (pipe(fd) == -1)
+		return (0);
+	g_pid = fork();
+	if (g_pid == 0)
 	{
-		write (1, "> ", 2);
-		line = get_next_line(0);
-		if (!ft_strcmp(line, limiter))
+		while (1)
 		{
+			write (1, "> ", 2);
+			line = get_next_line(0);
+			verif_limiter(line, limiter);
+			write(fd[1], line, ft_strlen(line));
 			free (line);
-			line = NULL;
-			return (str);
 		}
-		str = ft_strjoin_f(str, line, 3);
 	}
+	else
+	{
+		waitpid(g_pid, NULL, 0);
+		close (fd[1]);
+		return (fd_to_str(fd));
+	}
+	return (fd_to_str(fd));
 }
 
 int	strlen_name_var(int i, char *str)
@@ -97,14 +108,15 @@ int	create_infile(char *limiter, char **envp)
 	int		fd_hd[2];
 	int		in_fd;
 
-	str = ft_calloc(1, 1);
+	str = NULL;
 	limiter = ft_strjoin_f(limiter, ft_strdup("\n"), 2);
 	line = NULL;
 	if (pipe(fd_hd) == -1)
 		perror("Minishell: HereDoc: ");
-	str = read_input(limiter, str, line);
+	str = read_input(limiter, line);
 	str = ft_strjoin_f(str, ft_strdup("\0"), 3);
-	line = modif(ft_strdup(str), envp);
+	if (str)
+		line = modif(ft_strdup(str), envp);
 	write (fd_hd[1], line, ft_strlen(line));
 	free(str);
 	free (line);

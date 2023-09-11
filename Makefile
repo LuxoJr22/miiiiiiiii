@@ -1,6 +1,6 @@
 SRCS = srcs/main.c srcs/env.c srcs/echo.c srcs/utils.c srcs/utils_exec.c srcs/exec.c srcs/parsing.c srcs/pipe.c srcs/ft_split_parse.c \
 	   srcs/parsing_redirec.c srcs/here_doc.c srcs/redirection.c srcs/cd.c srcs/unset.c srcs/export.c srcs/signal.c \
-	   srcs/ft_split_parse_two.c srcs/here_doc_two.c srcs/exit.c srcs/utils_two.c srcs/parsing_redirec_two.c srcs/pwd.c
+	   srcs/ft_split_parse_two.c srcs/here_doc_two.c srcs/exit.c srcs/utils_two.c srcs/parsing_redirec_two.c srcs/pwd.c srcs/utils_hd.c
 
 SRCS_BONUS	= 
 CC = gcc
