@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 12:07:17 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/11 18:32:14 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/12 16:29:59 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,17 @@ char	*join_path(char **str)
 	return (line);
 }
 
+int	is_next_spaces(char *str, int i)
+{
+	while (str[i])
+	{
+		if (!((str[i] >= 9 && str[i] <= 13) || str[i] == 32))
+			return (0);
+		i ++;
+	}
+	return (1);
+}
+
 int	verif(char *line)
 {
 	int	i;
@@ -40,6 +51,8 @@ int	verif(char *line)
 			return (-2);
 		if (line[i] == '<' && line[i + 1] == '<' && line[i + 2] == '<')
 			return (-3);
+		if ((line[i] == '<' || line[i] == '>' || line[i] == '|') && is_next_spaces(line, i + 1))
+			return (-4);
 		i ++;
 		if (line[i] == 34)
 			while (line[i] != 34)
@@ -53,24 +66,6 @@ int	verif(char *line)
 
 void	manage_exec(char *line, char **envp, t_cmd *cmd)
 {
-	if (verif(line) == -1)
-	{
-		printf ("Minishell: syntax error near unexpected token `|'\n");
-		change_env(envp, "?=258");
-		return ;
-	}
-	if (verif(line) == -2)
-	{
-		printf ("Minishell: syntax error near unexpected token `>'\n");
-		change_env(envp, "?=258");
-		return ;
-	}
-	if (verif(line) == -3)
-	{
-		printf ("Minishell: syntax error near unexpected token `<'\n");
-		change_env(envp, "?=258");
-		return ;
-	}
 	if (cmd->next)
 		manage_pipe(cmd, envp, line);
 	else

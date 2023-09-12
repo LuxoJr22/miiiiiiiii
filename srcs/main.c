@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/11 17:53:56 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/12 16:31:03 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,11 @@ int	main(int ac, char **av, char **envp)
 		{
 			add_history(oui);
 			cmd = parsed_line(oui, envn);
-			manage_exec(oui, envn, cmd);
-			free_list(cmd);
+			if (cmd)
+			{
+				manage_exec(oui, envn, cmd);
+				free_list(cmd);
+			}
 		}
 		else
 			change_env(envn, "?=0");

@@ -15,14 +15,9 @@ HereDoc :
 - leaks init_env avec here doc
 
 
-/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\
-env $?
-unset/export $?
-export simple
 cat |
 ||
 |
-/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\
 
 
 
