@@ -6,7 +6,7 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 13:29:31 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/11 13:03:05 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/12 18:23:22 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	create_infile(char *limiter, char **envp)
 	if (pipe(fd_hd) == -1)
 		perror("Minishell: HereDoc: ");
 	str = read_input(limiter, line);
-	str = ft_strjoin_f(str, ft_strdup("\0"), 3);
+	str = ft_strjoin_f(str, "\0", 1);
 	if (str)
 		line = modif(ft_strdup(str), envp);
 	write (fd_hd[1], line, ft_strlen(line));

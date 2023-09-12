@@ -13,3 +13,4 @@ HereDoc :
 - ctrl\d sans premier '\n' ne marche pas bien
 - var env marche pas 
 - leaks init_env avec here doc
+<a leaks | <a <<a

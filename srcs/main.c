@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/12 16:35:27 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/12 17:29:13 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,8 @@ int	main(int ac, char **av, char **envp)
 			add_history(oui);
 			cmd = parsed_line(oui, envn);
 			if (cmd)
-			{
 				manage_exec(oui, envn, cmd);
-				free_list(cmd);
-			}
+			free_list(cmd);
 		}
 		else
 			change_env(envn, "?=0");
