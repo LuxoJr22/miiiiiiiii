@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 12:07:17 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/12 16:29:59 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/12 16:42:33 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	is_next_spaces(char *str, int i)
 		if (!((str[i] >= 9 && str[i] <= 13) || str[i] == 32))
 			return (0);
 		i ++;
+		if (str[i] && (str[i] == '|' || str[i] == '<' || str[i] == '>'))
+			return(1);
 	}
 	return (1);
 }
