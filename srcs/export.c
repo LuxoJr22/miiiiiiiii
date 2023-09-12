@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:44:31 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/11 16:20:11 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/12 15:39:13 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	ft_export(char **envp, char **str)
 {
 	int		i;
 	int		y;
+	char	*quotes;
 
 	y = 1;
 	i = 0;
@@ -58,17 +59,25 @@ void	ft_export(char **envp, char **str)
 	{
 		while (envp[i])
 		{
-			printf("declare -x %s\n", ft_quote(envp[i]));
+			if (envp[i][0] != '?')
+			{
+				quotes = ft_quote(envp[i]);
+				printf("declare -x %s\n", quotes);
+				free(quotes);
+			}
 			i ++;
 		}
 		return ;
 	}
 	while (str[y])
 	{
-		if (ft_isalpha(str[y][0]))
+		if (ft_isalpha(str[y][0]) && !is_in(str[y], '?'))
 			ft_export2(envp, str, i, y);
 		else
-			printf("minishell: export: `%s': not a valid identifier\n", str[y]);
+		{
+			if (!(is_in(str[y], '?') && (ft_strlen(str[y]) < 2)))
+				printf("minishell: export: `%s': not a valid identifier\n", str[y]);
+		}
 		y ++;
 	}
 }

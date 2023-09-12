@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 19:24:07 by sforesti          #+#    #+#             */
-/*   Updated: 2023/07/05 02:59:44 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/12 15:29:51 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*ft_quote(char *str)
 	while (str[i])
 	{
 		ret[i + off] = str[i];
-		if (str[i] == '=')
+		if (str[i] == '=' && off == 0)
 		{
 			off ++;
 			ret[i + off] = '"';

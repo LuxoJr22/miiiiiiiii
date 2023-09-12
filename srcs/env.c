@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 19:28:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/06 17:25:18 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/12 15:07:13 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_env(char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		if (is_in(envp[i], '='))
+		if (is_in(envp[i], '=') && envp[i][0] != '?')
 			printf("%s\n", envp[i]);
 		i ++;
 	}

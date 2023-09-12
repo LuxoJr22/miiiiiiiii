@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:56:21 by sforesti          #+#    #+#             */
-/*   Updated: 2023/07/05 02:56:34 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/12 15:04:30 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,23 @@ void	ft_unset(char **name, char **envp)
 	y = 1;
 	while (name[y])
 	{
-		i = index_env(name[y], envp) + 1;
-		while (i != -1 && envp[i])
+		if (!is_in(name[y], '?'))
 		{
-			envp[i - 1] = envp[i];
-			i ++;
+			i = index_env(name[y], envp) + 1;
+			free(envp[i - 1]);
+			while (i != -1 && envp[i])
+			{
+				envp[i - 1] = envp[i];
+				i ++;
+			}
+			if (i != -1)
+				envp[i - 1] = 0;
 		}
-		if (i != -1)
-			envp[i - 1] = 0;
+		else
+		{
+			if (ft_strlen(name[y]) < 2)
+				printf("minishell: export: `%s': not a valid identifier\n", name[y]);			
+		}
 		y ++;
 	}
 }
