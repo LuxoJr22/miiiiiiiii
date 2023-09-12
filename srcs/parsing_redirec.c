@@ -6,7 +6,7 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 08:15:45 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/12 15:44:00 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/12 15:44:55 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,29 +50,6 @@ t_file	*init_tfile(char *line)
 	file->next = 0;
 	return (file);
 }
-int verif_redir(t_cmd *cmd)
-{
-	char	**tmp;
-	char	*lines;
-	int		i;
-
-	i = 0;
-	lines = ft_strjoin_f(cmd->arg[0], "\0", 4);
-	while (cmd->arg[++i])
-		lines = ft_strjoin_f(lines, cmd->arg[i], 1);
-	tmp = ft_split_two(lines, " <>");
-	free (lines);
-	if (!tmp[0])
-	{
-		ft_putstr_fd("Minishell: syntax error near unexpected token `newline'\n", 2);
-		cmd->here_doc = 1;
-		free_dptr (tmp);
-		return (1);\
-	}
-	free_dptr (tmp);
-	return (0);
-}
-
 int verif_redir(t_cmd *cmd)
 {
 	char	**tmp;
