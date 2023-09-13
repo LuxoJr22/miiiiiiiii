@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:58:59 by sforesti          #+#    #+#             */
-/*   Updated: 2023/07/06 12:56:56 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/13 16:14:31 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@ void	ft_exit(char **envp, char	*arg)
 
 	i = 0;
 	if (envp && envp[1])
-		i = ft_atoi(envp[1]) % 256;
+		i = ft_atoi(ft_getenv(envp, "?"));
 	printf("exit\n");
 	if (arg)
-		printf ("Minishell: exit: %s: numeric argument required\n", arg);
+	{
+		ft_putstr_fd("Minishell: exit: ", 2);
+		ft_putstr_fd(arg, 2);
+		ft_putstr_fd(": numeric argument required\n", 2);
+	}
 	exit (i);
 }

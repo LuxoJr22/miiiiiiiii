@@ -3,26 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:33:52 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/13 12:37:24 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/13 16:54:16 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*acces_cmd(char **envp, char *cmd)
+char	*acces_cmd(char *cmd)
 {
 	char	**path;
 	char	*tmp_path;
 	int		i;
 
 	i = -1;
-	(void)envp;
 	if (!access(cmd, F_OK) && ft_strchr(cmd, '/'))
 		return (ft_strdup(cmd));
 	path = ft_split(getenv("PATH"), ':');
+	if (path == 0)
+		return (ft_strdup(cmd));
 	while (path[++i])
 		path[i] = ft_strjoin_f(path[i], ft_strdup("/"), 3);
 	i = -1;
@@ -59,6 +60,7 @@ void	get_line(char **envp, int fd)
 	i = read(fd, buf, 6);
 	if (i == -1)
 		return ;
+	g_pid = -1;
 	change_env(envp, buf);
 }
 
@@ -85,7 +87,6 @@ void	exec_cmd(t_cmd *cmd, char **envp, char *line)
 	char	*tmp;
 	int		fd[2];
 
-	g_pid = 0;
 	tmp = NULL;
 	if (pipe(fd) == -1)
 		return ;

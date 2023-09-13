@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 12:07:17 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/12 18:36:37 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/13 16:44:58 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,5 @@ void	get_command(t_cmd *cmd, char **envp, char *line)
 		if (!count_pipe(line) || command == NULL)
 			waitpid(-1, NULL, 0);
 	}
-	g_pid = -1;
 	free(command);
 }

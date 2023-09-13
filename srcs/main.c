@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/13 12:59:53 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/13 16:50:17 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,20 @@ char	**init_env(char **envp)
 	int		i;
 
 	i = -1;
-	envn = malloc(sizeof(char *) * (size_dptr(envp) + 2));
-	while (envp[++i])
-		envn[i] = ft_strdup(envp[i]);
+	if (!size_dptr(envp))
+	{
+		envn = malloc(sizeof(char *) * (5));
+		envn[0] = ft_strdup("PWD=/home/luxojr/project/mini");
+		envn[1] = ft_strdup("SHLVL=1");
+		envn[2] = ft_strdup("_=/usr/bin/env");
+		i = 3;
+	}
+	else
+	{
+		envn = malloc(sizeof(char *) * (size_dptr(envp) + 2));
+		while (envp[++i])
+			envn[i] = ft_strdup(envp[i]);
+	}
 	envn[i] = ft_strdup("?=0");
 	envn[i + 1] = 0;
 	return (envn);
@@ -77,14 +88,6 @@ char	*loop(char **envn, char *oui, t_cmd *cmd)
 {
 	free(oui);
 	oui = readline("Minishell>");
-	if (g_pid == -1)
-		change_env(envn, "?=131");
-	if (g_pid == -2)
-		change_env(envn, "?=1");
-	if (g_pid == -3)
-		change_env(envn, "?=0");
-	if (g_pid == -3)
-		change_env(envn, "?=130");
 	if (oui && *oui)
 	{
 		add_history(oui);
@@ -95,6 +98,14 @@ char	*loop(char **envn, char *oui, t_cmd *cmd)
 	}
 	else
 		change_env(envn, "?=0");
+	if (g_pid == -2)
+		change_env(envn, "?=131");
+	if (g_pid == -3)
+		change_env(envn, "?=1");
+	if (g_pid == -4)
+		change_env(envn, "?=0");
+	if (g_pid == -5)
+		change_env(envn, "?=130");
 	return (oui);
 }
 
@@ -103,10 +114,12 @@ int	main(int ac, char **av, char **envp)
 	char		*oui;
 	t_cmd		*cmd;
 	char		**envn;
+	int			i;
 
 	(void) ac;
 	(void) av;
 	g_pid = -1;
+	i = 0;
 	ft_init_signals();
 	envn = init_env(envp);
 	cmd = NULL;
@@ -115,7 +128,8 @@ int	main(int ac, char **av, char **envp)
 	{
 		oui = loop(envn, oui, cmd);
 	}
+	i = ft_atoi(ft_getenv(envn, "?"));
 	free_dptr(envn);
 	write(1, "exit\n", 5);
-	return (0);
+	return (i);
 }

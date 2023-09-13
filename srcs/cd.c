@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:42:38 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/02 13:07:14 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/13 15:51:23 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,15 @@ void	go_home(char	**envp)
 	char	*path;
 
 	y = index_env("OLDPWD", envp);
-	envp[y] = ft_strjoin_f("OLDPWD=", getcwd(NULL, 0), 2);
-	path = ft_getenv(envp, "HOME");
+	if (y != -1)
+	{
+		free(envp[y]);
+		envp[y] = ft_strjoin_f("OLDPWD=", getcwd(NULL, 0), 2);
+		path = ft_getenv(envp, "HOME");
+	}
 	chdir(path);
 	y = index_env("PWD", envp);
+	free(envp[y]);
 	envp[y] = ft_strjoin_f("PWD=", getcwd(NULL, 0), 2);
 	free (path);
 	return ;
@@ -56,8 +61,11 @@ void	ft_cd(char *path, char **envp)
 		return ;
 	}
 	y = index_env("OLDPWD", envp);
-	free(envp[y]);
-	envp[y] = ft_strjoin_f("OLDPWD=", getcwd(NULL, 0), 2);
+	if (y != -1)
+	{
+		free(envp[y]);
+		envp[y] = ft_strjoin_f("OLDPWD=", getcwd(NULL, 0), 2);
+	}
 	chdir(path);
 	y = index_env("PWD", envp);
 	free(envp[y]);

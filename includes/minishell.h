@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/13 12:40:24 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/13 16:24:11 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_export(char **envp, char **str);
 void	ft_unset(char **name, char **envp);
 void	ft_cd(char *path, char **envp);
 char	**split_path(char **envp);
-char	*acces_cmd(char **envp, char *cmd);
+char	*acces_cmd(char *cmd);
 char	*ft_quote(char *str);
 void	free_dptr(char	**dptr);
 void	exec_cmd(t_cmd *cmd, char **envp, char *line);

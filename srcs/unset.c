@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:56:21 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/12 18:44:43 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/13 16:15:50 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ void	ft_unset_error(char **name, char **envp, int y)
 {
 	if (ft_strlen(name[y]) < 2)
 	{
-		printf("minishell: export: `%s': not a valid identifier\n", name[y]);
+		ft_putstr_fd("minishell: export: `", 2);
+		ft_putstr_fd(name[y], 2);
+		ft_putstr_fd("': not a valid identifier\n", 2);
 		change_env(envp, "?=1");
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 17:50:17 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/13 12:41:05 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/13 16:24:27 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	get_commands(char *line, t_cmd *cmd, char **envp)
 		call_parsing_redir(cmd, line);
 		pre_process(cmd->arg, envp);
 		if (cmd->arg[0])
-			cmd->name = acces_cmd(envp, cmd->arg[0]);
+			cmd->name = acces_cmd(cmd->arg[0]);
 		if (cmds[i + 1])
 		{
 			cmd->next = malloc(sizeof(t_cmd));
@@ -54,25 +54,26 @@ int	verif_line(char *line, char **envp)
 {
 	if (verif(line) == -1)
 	{
-		printf ("Minishell: syntax error near unexpected token `|'\n");
+		ft_putstr_fd("Minishell: syntax error near unexpected token `|'\n", 2);
 		change_env(envp, "?=258");
 		return (0);
 	}
 	if (verif(line) == -2)
 	{
-		printf ("Minishell: syntax error near unexpected token `>'\n");
+		ft_putstr_fd("Minishell: syntax error near unexpected token `>'\n", 2);
 		change_env(envp, "?=258");
 		return (0);
 	}
 	if (verif(line) == -3)
 	{
-		printf ("Minishell: syntax error near unexpected token `<'\n");
+		ft_putstr_fd("Minishell: syntax error near unexpected token `<'\n", 2);
 		change_env(envp, "?=258");
 		return (0);
 	}
 	if (verif(line) == -4)
 	{
-		printf ("Minishell: syntax error near unexpected token `newline'\n");
+		ft_putstr_fd("Minishell: syntax error near unexpected \
+		token `newline'\n", 2);
 		change_env(envp, "?=258");
 		return (0);
 	}
