@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:42:38 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/13 15:51:23 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/13 18:56:51 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@ void	go_home(char	**envp)
 	int		y;
 	char	*path;
 
+	path = 0;
 	y = index_env("OLDPWD", envp);
 	if (y != -1)
 	{
 		free(envp[y]);
 		envp[y] = ft_strjoin_f("OLDPWD=", getcwd(NULL, 0), 2);
-		path = ft_getenv(envp, "HOME");
 	}
+	if (index_env("HOME", envp) != -1)
+		path = ft_getenv(envp, "HOME");
 	chdir(path);
 	y = index_env("PWD", envp);
 	free(envp[y]);

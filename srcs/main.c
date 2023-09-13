@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/13 16:50:17 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/13 18:59:26 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,14 @@ char	*loop(char **envn, char *oui, t_cmd *cmd)
 {
 	free(oui);
 	oui = readline("Minishell>");
+	if (g_pid == -5)
+		change_env(envn, "?=0");
+	if (g_pid == -2)
+		change_env(envn, "?=131");
+	if (g_pid == -3)
+		change_env(envn, "?=1");
+	if (g_pid == -4)
+		change_env(envn, "?=130");
 	if (oui && *oui)
 	{
 		add_history(oui);
@@ -98,14 +106,6 @@ char	*loop(char **envn, char *oui, t_cmd *cmd)
 	}
 	else
 		change_env(envn, "?=0");
-	if (g_pid == -2)
-		change_env(envn, "?=131");
-	if (g_pid == -3)
-		change_env(envn, "?=1");
-	if (g_pid == -4)
-		change_env(envn, "?=0");
-	if (g_pid == -5)
-		change_env(envn, "?=130");
 	return (oui);
 }
 
@@ -128,7 +128,7 @@ int	main(int ac, char **av, char **envp)
 	{
 		oui = loop(envn, oui, cmd);
 	}
-	i = ft_atoi(ft_getenv(envn, "?"));
+	i = ft_atoi_f(ft_getenv(envn, "?"));
 	free_dptr(envn);
 	write(1, "exit\n", 5);
 	return (i);

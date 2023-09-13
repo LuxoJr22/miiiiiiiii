@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/13 16:24:11 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/13 19:03:50 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	ft_exit(char **envp, char *arg);
 void	ft_export(char **envp, char **str);
 void	ft_unset(char **name, char **envp);
 void	ft_cd(char *path, char **envp);
+int		ft_atoi_f(char *str);
 char	**split_path(char **envp);
 char	*acces_cmd(char *cmd);
 char	*ft_quote(char *str);

@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 17:50:17 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/13 16:24:27 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/13 18:47:45 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	verif_line(char *line, char **envp)
 	if (verif(line) == -4)
 	{
 		ft_putstr_fd("Minishell: syntax error near unexpected \
-		token `newline'\n", 2);
+token `newline'\n", 2);
 		change_env(envp, "?=258");
 		return (0);
 	}

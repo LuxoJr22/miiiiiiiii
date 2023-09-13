@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:33:52 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/13 16:54:16 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/13 19:03:05 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	failed_exec(char *tmp, t_cmd *cmd, int fd[2])
 				cmd->arg[0], 4), ": command not found\n", 1);
 	ft_putstr_fd(tmp, 2);
 	free(tmp);
-	exit(1);
+	exit(127);
 }
 
 void	get_line(char **envp, int fd)
@@ -58,9 +58,13 @@ void	get_line(char **envp, int fd)
 	int		i;
 
 	i = read(fd, buf, 6);
-	if (i == -1)
+	if (i <= 0)
+	{
+		if (g_pid > 0)
+			g_pid = -5;
 		return ;
-	g_pid = -1;
+	}
+	g_pid = -6;
 	change_env(envp, buf);
 }
 
@@ -77,7 +81,7 @@ void	child_process(t_cmd *cmd, char *tmp, int fd[2], char **envp)
 		status = execve(cmd->name, cmd->arg, envp);
 	if ((cmd->here_doc && !cmd->file->fd_file)
 		|| (cmd->here_doc && cmd->file->type == 1))
-		exit (0);
+		exit (1);
 	if (status == -1)
 		failed_exec(tmp, cmd, fd);
 }
