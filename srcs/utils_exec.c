@@ -3,33 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:33:52 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/12 23:58:20 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/13 12:37:24 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	free_dptr(char **dptr)
-{
-	int	i;
-
-	i = -1;
-	while (dptr[++i])
-		free(dptr[i]);
-	free(dptr);
-}
-
-char	*free_dptr_line(char **dptr, char *str)
-{
-	char	*ret;
-
-	ret = ft_strdup(str);
-	free_dptr(dptr);
-	return (ret);
-}
 
 char	*acces_cmd(char **envp, char *cmd)
 {
@@ -81,9 +62,26 @@ void	get_line(char **envp, int fd)
 	change_env(envp, buf);
 }
 
+void	child_process(t_cmd *cmd, char *tmp, int fd[2], char **envp)
+{
+	int	status;
+
+	status = 0;
+	if (cmd->in && cmd->in != -1)
+		dup2(cmd->in, STDIN_FILENO);
+	if (cmd->out && cmd->out != -1)
+		dup2(cmd->out, STDOUT_FILENO);
+	if (!cmd->here_doc)
+		status = execve(cmd->name, cmd->arg, envp);
+	if ((cmd->here_doc && !cmd->file->fd_file)
+		|| (cmd->here_doc && cmd->file->type == 1))
+		exit (0);
+	if (status == -1)
+		failed_exec(tmp, cmd, fd);
+}
+
 void	exec_cmd(t_cmd *cmd, char **envp, char *line)
 {
-	int		status;
 	char	*tmp;
 	int		fd[2];
 
@@ -93,21 +91,8 @@ void	exec_cmd(t_cmd *cmd, char **envp, char *line)
 		return ;
 	if (!count_pipe(line) || !cmd->arg[0])
 		g_pid = fork();
-	status = 0;
 	if (g_pid == 0)
-	{
-		if (cmd->in && cmd->in != -1)
-			dup2(cmd->in, STDIN_FILENO);
-		if (cmd->out && cmd->out != -1)
-			dup2(cmd->out, STDOUT_FILENO);
-		if (!cmd->here_doc)
-			status = execve(cmd->name, cmd->arg, envp);
-		if ((cmd->here_doc && !cmd->file->fd_file)
-			|| (cmd->here_doc && cmd->file->type == 1))
-			exit (0);
-		if (status == -1)
-			failed_exec(tmp, cmd, fd);
-	}
+		child_process(cmd, tmp, fd, envp);
 	else
 	{
 		close(fd[1]);

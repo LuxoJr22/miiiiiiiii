@@ -3,70 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 17:50:17 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/13 12:13:36 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/13 12:41:05 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	reset_quote_two(int quote, char *str, char	*ret)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (str[i])
-	{
-		if (!quote && (str[i] == 34 || str[i] == 39))
-			quote = str[i++];
-		else if (quote == str[i])
-		{
-			quote = 0;
-			i ++;
-		}
-		else if (str[i])
-		{
-			ret[j] = str[i];
-			i ++;
-			j ++;
-		}
-	}
-	ret[j] = 0;
-	free(str);
-}
-
-char	*reset_quote(char *str)
-{
-	int		i;
-	int		j;
-	int		quote;
-	char	*ret;
-
-	i = 0;
-	j = 0;
-	quote = 0;
-	while (str[i])
-	{
-		if (!quote && (str[i] == 34 || str[i] == 39))
-		{
-			quote = str[i];
-			j ++;
-		}
-		else if (quote == str[i])
-		{
-			quote = 0;
-			j ++;
-		}
-		i ++;
-	}
-	ret = malloc(sizeof(char) * (i - j) + 1);
-	reset_quote_two(quote, str, ret);
-	return (ret);
-}
 
 void	init_struct(t_cmd *cmd)
 {

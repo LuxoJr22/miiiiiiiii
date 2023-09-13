@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/12 18:50:11 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/13 12:40:24 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,6 @@ void	verif_limiter(char *line, char *limiter);
 char	*fd_to_str(int fd[2]);
 void	change_env(char **envp, char *str);
 int		verif(char *line);
+char	*get_line_env(char *str, char *ret, char **envp);
 
 #endif

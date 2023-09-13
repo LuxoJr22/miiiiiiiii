@@ -6,7 +6,7 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:51:49 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/11 13:01:19 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/13 12:58:34 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,19 @@ void	ft_handle_ctrlc(int signal)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
+		g_pid = -2;
 	}
 	else if (g_pid > 0)
 	{
-		write(1, "^C\n", 3);
+		write(1, "\n", 1);
 		kill(g_pid, SIGTERM);
-		g_pid = -1;
+		g_pid = -3;
 	}
 	else
 	{
 		write(1, "^C\n", 3);
 		kill(g_pid, SIGTERM);
-		g_pid = -1;
+		g_pid = -4;
 	}
 }
 

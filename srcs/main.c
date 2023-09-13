@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/12 19:29:28 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/13 12:59:53 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,6 @@ int	built_in(char *command, t_cmd *cmd, char **envp)
 	else
 		return (0);
 	return (1);
-}
-
-char	*get_line_env(char *str, char *ret, char **envp)
-{
-	if (str[0] == '$')
-	{
-		free(str);
-		str = ft_getenv(envp, ret);
-	}
-	else
-	{
-		free(str);
-		str = ft_strmup(ret);
-	}
-	return (str);
 }
 
 char	**pre_process(char **str, char **envp)
@@ -88,6 +73,31 @@ char	**init_env(char **envp)
 	return (envn);
 }
 
+char	*loop(char **envn, char *oui, t_cmd *cmd)
+{
+	free(oui);
+	oui = readline("Minishell>");
+	if (g_pid == -1)
+		change_env(envn, "?=131");
+	if (g_pid == -2)
+		change_env(envn, "?=1");
+	if (g_pid == -3)
+		change_env(envn, "?=0");
+	if (g_pid == -3)
+		change_env(envn, "?=130");
+	if (oui && *oui)
+	{
+		add_history(oui);
+		cmd = parsed_line(oui, envn);
+		if (cmd)
+			manage_exec(oui, envn, cmd);
+		free_list(cmd);
+	}
+	else
+		change_env(envn, "?=0");
+	return (oui);
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	char		*oui;
@@ -103,18 +113,7 @@ int	main(int ac, char **av, char **envp)
 	oui = getcwd(NULL, 0);
 	while (oui != 0)
 	{
-		free(oui);
-		oui = readline("Minishell>");
-		if (oui && *oui)
-		{
-			add_history(oui);
-			cmd = parsed_line(oui, envn);
-			if (cmd)
-				manage_exec(oui, envn, cmd);
-			free_list(cmd);
-		}
-		else
-			change_env(envn, "?=0");
+		oui = loop(envn, oui, cmd);
 	}
 	free_dptr(envn);
 	write(1, "exit\n", 5);

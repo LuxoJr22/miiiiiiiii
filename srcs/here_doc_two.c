@@ -6,7 +6,7 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:15:18 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/11 12:56:16 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/13 12:47:12 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	add_var_env(char *var, char **envp, char *line)
 	if (content == NULL)
 	{
 		line[i] = '\n';
-		return (1);
+		return (i);
 	}
 	while (content[y])
 	{
