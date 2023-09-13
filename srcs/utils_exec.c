@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:33:52 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/11 17:49:56 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/12 23:58:20 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	get_line(char **envp, int fd)
 
 	i = read(fd, buf, 6);
 	if (i == -1)
-		return;
+		return ;
 	change_env(envp, buf);
 }
 

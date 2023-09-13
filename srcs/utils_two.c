@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_two.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:59:54 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/12 18:14:03 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/12 19:39:17 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	free_list(t_cmd *cmd)
 			free(cmd->file);
 			cmd->file = tp;
 		}
-		if (cmd->arg && cmd->arg[0] && cmd->arg[0][0] != '\0')
+		if (cmd->arg)
 			free_dptr(cmd->arg);
 		if (cmd->name && cmd->name[0])
 			free(cmd->name);

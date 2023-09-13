@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:44:31 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/12 15:39:13 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/12 18:41:02 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,33 @@ void	ft_export2(char **envp, char **str, int i, int y)
 	}
 }
 
+void	ft_export_empty(char **envp, int i)
+{
+	char	*quotes;
+
+	while (envp[i])
+	{
+		if (envp[i][0] != '?')
+		{
+			quotes = ft_quote(envp[i]);
+			printf("declare -x %s\n", quotes);
+			free(quotes);
+		}
+		i ++;
+	}
+	return ;
+}
+
 void	ft_export(char **envp, char **str)
 {
 	int		i;
 	int		y;
-	char	*quotes;
 
 	y = 1;
 	i = 0;
 	if (str[1] == 0)
 	{
-		while (envp[i])
-		{
-			if (envp[i][0] != '?')
-			{
-				quotes = ft_quote(envp[i]);
-				printf("declare -x %s\n", quotes);
-				free(quotes);
-			}
-			i ++;
-		}
+		ft_export_empty(envp, i);
 		return ;
 	}
 	while (str[y])
@@ -76,7 +83,8 @@ void	ft_export(char **envp, char **str)
 		else
 		{
 			if (!(is_in(str[y], '?') && (ft_strlen(str[y]) < 2)))
-				printf("minishell: export: `%s': not a valid identifier\n", str[y]);
+				printf("minishell: export: `%s': not a valid identifier\n",
+					str[y]);
 		}
 		y ++;
 	}

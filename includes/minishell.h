@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/12 16:15:37 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/12 18:50:11 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	parsing_en(t_cmd *cmd, t_file *file, int coor[2]);
 void	parsing_ex_append(t_cmd *cmd, t_file *file, int coor[2]);
 void	parsing_ex(t_cmd *cmd, t_file *file, int coor[2]);
 void	choose_parsing(t_cmd *cmd, t_file *file, char *line, int coor[2]);
-void	call_parsing_redir(t_cmd *cmd, char *lines, char *line);
+void	call_parsing_redir(t_cmd *cmd, char *line);
 void	ft_pwd(char **envp);
 void	free_list(t_cmd *cmd);
 char	*ft_strmup(const char *s1);

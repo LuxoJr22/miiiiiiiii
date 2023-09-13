@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_redirec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 08:15:45 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/12 18:25:50 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/12 19:37:21 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ t_file	*init_tfile(char *line)
 	return (file);
 }
 
-void	call_parsing_redir(t_cmd *cmd, char *lines, char *line)
+void	call_parsing_redir(t_cmd *cmd, char *line)
 {
+	char	*lines;
+
 	if (find_name(cmd->arg, 1) != -1 || find_name(cmd->arg, 2) != -1)
 	{
 		manage_redirec(cmd, line);

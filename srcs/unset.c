@@ -6,11 +6,20 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:56:21 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/12 15:04:30 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/12 18:44:43 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_unset_error(char **name, char **envp, int y)
+{
+	if (ft_strlen(name[y]) < 2)
+	{
+		printf("minishell: export: `%s': not a valid identifier\n", name[y]);
+		change_env(envp, "?=1");
+	}
+}
 
 void	ft_unset(char **name, char **envp)
 {
@@ -33,10 +42,7 @@ void	ft_unset(char **name, char **envp)
 				envp[i - 1] = 0;
 		}
 		else
-		{
-			if (ft_strlen(name[y]) < 2)
-				printf("minishell: export: `%s': not a valid identifier\n", name[y]);			
-		}
+			ft_unset_error(name, envp, y);
 		y ++;
 	}
 }

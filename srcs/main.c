@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/12 17:29:13 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/12 19:29:28 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,6 @@ int	built_in(char *command, t_cmd *cmd, char **envp)
 
 char	*get_line_env(char *str, char *ret, char **envp)
 {
-	/*if (str[0] == '$' && ret[0] == '?')
-	{
-		free(str);
-		str = ft_strjoin_f((ft_getenv(envp, "?")),
-				ft_substr(ret, 1, ft_strlen(ret) - 1), 3);
-	}*/
 	if (str[0] == '$')
 	{
 		free(str);
