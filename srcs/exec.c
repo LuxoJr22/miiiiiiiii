@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 12:07:17 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/13 16:44:58 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/14 14:46:12 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@ int	verif(char *line)
 {
 	int	i;
 
-	i = 0;
-	while (line[i])
+	i = -1;
+	while (i == -1 || line[i])
 	{
+		i ++;
 		if (line[i] == '|' && line[i + 1] == '|')
 			return (-1);
 		if (line[i] == '>' && line[i + 1] == '>' && line[i + 2] == '>')
@@ -57,13 +58,12 @@ int	verif(char *line)
 		if ((line[i] == '<' || line[i] == '>' || line[i] == '|')
 			&& is_next_spaces(line, i + 1))
 			return (-4);
-		i ++;
 		if (line[i] == 34)
-			while (line[i] != 34)
-				i++;
+			while (line[i] && line[++i] != 34)
+				;
 		if (line[i] == 39)
-			while (line[i] != 39)
-				i++;
+			while (line[i] && line[++i] != 39)
+				;
 	}
 	return (0);
 }

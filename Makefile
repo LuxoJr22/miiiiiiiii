@@ -18,7 +18,7 @@ OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 .c.o:
 		$(CC) $(CFLAGS) -c $< -o $@
 
-all: check_brew check_readline $(NAME)
+all: $(NAME)
 
 $(NAME):	$(OBJS)
 			make -C libft
