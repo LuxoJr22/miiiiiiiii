@@ -6,7 +6,7 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 20:16:02 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/14 16:40:11 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:28:33 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	error_msg(char *fd_file)
 {
 	char	*str;
 
-	str	= ft_strjoin_f("Minishell:", fd_file, 4);
+	str = ft_strjoin_f("Minishell:", fd_file, 4);
 	perror(str);
 	free (str);
 }
