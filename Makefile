@@ -10,7 +10,7 @@ NAME = minishell
 NAME_BONUS =
 RM = rm -f
 LIBS = -Llibft -lft $(READLINE)
-READLINE = -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include/readline/
+READLINE =  -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include/readline/
 
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
@@ -18,7 +18,7 @@ OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 .c.o:
 		$(CC) $(CFLAGS) -c $< -o $@
 
-all: $(NAME)
+all: check_brew check_readline $(NAME)
 
 $(NAME):	$(OBJS)
 			make -C libft
