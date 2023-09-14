@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/13 18:59:26 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/14 16:30:59 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 int	built_in(char *command, t_cmd *cmd, char **envp)
 {
-	if (is_equal("echo", command))
+	if (!cmd->here_doc && is_equal("echo", command))
 		ft_echo(cmd->arg);
-	else if (is_equal("pwd", command))
+	else if (!cmd->here_doc && is_equal("pwd", command))
 		ft_pwd(envp);
-	else if (is_equal("export", command))
+	else if (!cmd->here_doc && is_equal("export", command))
 		ft_export(envp, cmd->arg);
-	else if (is_equal("env", command) && !cmd->arg[1])
+	else if (!cmd->here_doc && is_equal("env", command) && !cmd->arg[1])
 		ft_env(envp);
-	else if (is_equal("exit", command))
+	else if (!cmd->here_doc && is_equal("exit", command))
 		ft_exit(envp, cmd->arg[1]);
-	else if (is_equal("unset", command))
+	else if (!cmd->here_doc && is_equal("unset", command))
 		ft_unset(cmd->arg, envp);
-	else if (is_equal("cd", command))
+	else if (!cmd->here_doc && is_equal("cd", command))
 		ft_cd(cmd->arg[1], envp);
 	else
 		return (0);

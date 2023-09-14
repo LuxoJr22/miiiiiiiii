@@ -6,11 +6,20 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 20:16:02 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/14 13:56:20 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/14 16:40:11 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	error_msg(char *fd_file)
+{
+	char	*str;
+
+	str	= ft_strjoin_f("Minishell:", fd_file, 4);
+	perror(str);
+	free (str);
+}
 
 int	open_files_enter(t_cmd *cmd, t_file *file, char **envp)
 {
@@ -22,7 +31,7 @@ int	open_files_enter(t_cmd *cmd, t_file *file, char **envp)
 		fd = open (file->fd_file, O_RDONLY);
 		if (fd == -1 && !cmd->here_doc)
 		{
-			perror(ft_strjoin_f("Minishell: ", file->fd_file, 4));
+			error_msg(file->fd_file);
 			change_env(envp, "?=1");
 			cmd->here_doc = 1;
 		}
@@ -32,7 +41,7 @@ int	open_files_enter(t_cmd *cmd, t_file *file, char **envp)
 		fd = create_infile(file->fd_file, envp);
 		if (fd == -1)
 		{
-			perror(ft_strjoin_f("Minishell: ", file->fd_file, 4));
+			error_msg(file->fd_file);
 			cmd->here_doc = 1;
 		}
 	}
@@ -49,7 +58,7 @@ int	open_files_exit(t_cmd *cmd, t_file *file, char **envp)
 		fd = open (file->fd_file, O_CREAT | O_TRUNC | O_RDWR, 0644);
 		if (fd == -1)
 		{
-			perror(ft_strjoin_f("Minishell: ", file->fd_file, 4));
+			error_msg(file->fd_file);
 			change_env(envp, "?=1");
 			cmd->here_doc = 1;
 		}
@@ -59,7 +68,7 @@ int	open_files_exit(t_cmd *cmd, t_file *file, char **envp)
 		fd = open (file->fd_file, O_CREAT | O_APPEND | O_RDWR, 0644);
 		if (fd == -1)
 		{
-			perror(ft_strjoin_f("Minishell: ", file->fd_file, 4));
+			error_msg(file->fd_file);
 			change_env(envp, "?=1");
 			cmd->here_doc = 1;
 		}

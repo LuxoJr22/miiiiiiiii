@@ -6,7 +6,7 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:33:52 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/14 13:46:59 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:14:48 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,7 @@ void	exec_cmd(t_cmd *cmd, char **envp, char *line)
 		close(fd[1]);
 		wait(NULL);
 		get_line(envp, fd[0]);
+		if (cmd->here_doc == 1)
+			g_pid = -3;
 	}
 }
