@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:57:20 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/07 19:05:47 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/14 13:47:58 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	exec_pipe(t_cmd *cmd, char **envp, char *line)
 		if (cmd->next)
 			redirection_exit(cmd);
 		get_command(cmd, envp, line);
-		exit(0);
+		exit(1);
 	}
 	else
 		redirection_enter(cmd);
