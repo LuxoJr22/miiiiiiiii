@@ -10,7 +10,7 @@ NAME = minishell
 NAME_BONUS =
 RM = rm -f
 LIBS = -Llibft -lft $(READLINE)
-READLINE =  -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include/readline/
+READLINE =  -lreadline -L$(shell brew --prefix readline)/lib -I$(shell brew --prefix readline)/include/readline/
 
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
