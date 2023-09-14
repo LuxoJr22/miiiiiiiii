@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/14 16:30:59 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:43:40 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	**pre_process(char **str, char **envp)
 			ret = ft_split(str[i], '$');
 			str[i] = get_line_env(str[i], ret[0], envp);
 			while (ret[y++])
-				str[i] = ft_strjoin_f(str[i], ft_getenv(envp, ret[y]), 3);
+				str[i] = ft_strjoin_env(str[i], ft_getenv(envp, ret[y]), 3);
 			y = 1;
 			free_dptr(ret);
 		}

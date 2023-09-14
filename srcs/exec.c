@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 12:07:17 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/14 14:46:12 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/14 17:53:38 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ char	*join_path(char **str)
 	return (line);
 }
 
-int	is_next_spaces(char *str, int i)
+int	is_next_spaces(char *str, int i, char c)
 {
 	while (str[i])
 	{
 		if (!((str[i] >= 9 && str[i] <= 13) || str[i] == 32))
 			return (0);
 		i ++;
-		if (str[i] && (str[i] == '|' || str[i] == '<'
-				|| str[i] == '>'))
+		if (str[i] && (str[i] == '|' || ((str[i] == '<'
+				|| str[i] == '>') && c != '|')))
 			return (1);
 	}
 	return (1);
@@ -56,7 +56,7 @@ int	verif(char *line)
 		if (line[i] == '<' && line[i + 1] == '<' && line[i + 2] == '<')
 			return (-3);
 		if ((line[i] == '<' || line[i] == '>' || line[i] == '|')
-			&& is_next_spaces(line, i + 1))
+			&& is_next_spaces(line, i + 1, line[i]))
 			return (-4);
 		if (line[i] == 34)
 			while (line[i] && line[++i] != 34)

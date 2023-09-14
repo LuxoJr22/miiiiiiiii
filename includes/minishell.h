@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/13 19:03:50 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/14 17:43:29 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	exec_cmd(t_cmd *cmd, char **envp, char *line);
 char	*str_lower(char *str);
 void	rl_replace_line(const char *text, int clear_undo);
 int		count_pipe(char *line);
+char	*ft_strjoin_env(char *s1, char *s2, int mode);
 char	**pre_process(char **str, char **envp);
 char	**ft_split_parse(char const *s, char c);
 int		manage_pipe(t_cmd *cmd, char **envp, char *line);

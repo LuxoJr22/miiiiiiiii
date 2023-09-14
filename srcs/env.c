@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 19:28:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/12 15:07:13 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/14 17:45:47 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*ft_getenv(char **envp, char *str)
 	char	**line;
 
 	i = -1;
-	while (envp[++i])
+	while (str && envp[++i])
 	{
 		o = 0;
 		line = ft_split(envp[i], '=');

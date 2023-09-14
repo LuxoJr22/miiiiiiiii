@@ -18,7 +18,7 @@ OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 .c.o:
 		$(CC) $(CFLAGS) -c $< -o $@
 
-all: check_brew check_readline $(NAME)
+all:  check_brew check_readline $(NAME)
 
 $(NAME):	$(OBJS)
 			make -C libft
@@ -37,6 +37,8 @@ check_brew:
 	@if test ! $$(which brew); then \
 	    echo "Brew is not installed. Installing now..."; \
 	    /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"; \
+	else \
+        echo "Brew is already installed."; \
 	fi
 	@echo "Brew OK"
 

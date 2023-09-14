@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 17:50:17 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/14 16:25:41 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:44:40 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,29 @@ void	get_commands(char *line, t_cmd *cmd, char **envp)
 	}
 	free_dptr(cmds);
 	cmd->next = 0;
+}
+
+char	*ft_strjoin_env(char *s1, char *s2, int mode)
+{
+	char	*r_str;
+	size_t	i;
+	size_t	j;
+
+	r_str = ft_calloc(sizeof(char), ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!r_str)
+		return (NULL);
+	j = -1;
+	i = -1;
+	while (s1 && s1[++i])
+		r_str[i] = s1[i];
+	while (s2 && s2[++j])
+		r_str[i++] = s2[j];
+	r_str[i] = '\0';
+	if (mode == 1 || mode == 3)
+		free(s1);
+	if (mode == 2 || mode == 3)
+		free(s2);
+	return (r_str);
 }
 
 int	verif_line(char *line, char **envp)
