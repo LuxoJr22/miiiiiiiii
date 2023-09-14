@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:59:54 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/12 19:39:17 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/14 17:22:03 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	is_in_quote(char *str, char c)
 			quote = str[i];
 		else if (str[i] == quote)
 			quote = 0;
-		if (str[i] == c && quote != 39 && str[i + 1] != 34)
+		if (str[i] == c && quote != 39 && str[i + 1] != 34 && ft_isalpha(str[i + 1]))
 			it ++;
 		i ++;
 	}
