@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/15 19:48:35 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/15 20:16:06 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,6 @@ char	**init_env(char **envp)
 	return (envn);
 }
 
-char	**env_change(char **envp, t_cmd *cmd)
-{
-	if (!cmd->here_doc && is_equal("export", cmd->name))
-		envp = ft_export(envp, cmd->arg);
-	else if (!cmd->here_doc && is_equal("unset", cmd->name))
-		envp = ft_unset(cmd->arg, envp);
-	return (envp);
-}
-
 char	**loop(char **envn, char *oui, t_cmd *cmd)
 {
 	if (g_pid == -2)
@@ -95,8 +86,10 @@ char	**loop(char **envn, char *oui, t_cmd *cmd)
 	{
 		add_history(oui);
 		cmd = parsed_line(oui, envn);
-		if (cmd && ((!ft_strcmp(cmd->name, "export") && ft_strlen(cmd->name) == 6)
-			|| (!ft_strcmp(cmd->name, "unset") && ft_strlen(cmd->name) == 5)))
+		if (cmd && ((!ft_strcmp(cmd->name, "export")
+					&& ft_strlen(cmd->name) == 6)
+				|| (!ft_strcmp(cmd->name, "unset")
+					&& ft_strlen(cmd->name) == 5)))
 			envn = env_change(envn, cmd);
 		else if (cmd)
 			manage_exec(oui, envn, cmd);

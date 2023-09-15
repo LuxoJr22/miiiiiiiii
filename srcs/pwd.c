@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 09:54:40 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/15 17:19:52 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/15 20:15:41 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,13 @@ char	*process_line(char *str, char **ret, char **envp)
 	}
 	free_dptr(ret);
 	return (str);
+}
+
+char	**env_change(char **envp, t_cmd *cmd)
+{
+	if (!cmd->here_doc && is_equal("export", cmd->name))
+		envp = ft_export(envp, cmd->arg);
+	else if (!cmd->here_doc && is_equal("unset", cmd->name))
+		envp = ft_unset(cmd->arg, envp);
+	return (envp);
 }

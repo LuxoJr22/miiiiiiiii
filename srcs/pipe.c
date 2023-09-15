@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:57:20 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/15 19:41:13 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/15 20:07:43 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,29 +69,29 @@ int	exec_pipe(t_cmd *cmd, char **envp, char *line)
 	return (0);
 }
 
-int    manage_pipe(t_cmd *cmd, char **envp, char *line)
+int	manage_pipe(t_cmd *cmd, char **envp, char *line)
 {
-    int        stdout_fd;
-    int        stdin_fd;
-    int     status;
-    char     *tp;
+	int		stdout_fd;
+	int		stdin_fd;
+	int		status;
+	char	*tp;
 
-    tp = NULL;
-    status = 0;
-    stdout_fd = dup(STDOUT_FILENO);
-    stdin_fd = dup(STDIN_FILENO);
-    while (cmd)
-    {
-        exec_pipe(cmd, envp, line);
-        cmd = cmd->next;
-    }
-    dup2(stdin_fd, 0);
-    dup2(stdout_fd, 1);
-    waitpid(g_pid, &status, 0);
-    tp = ft_strjoin_f("?=", ft_itoa(status / 256), 2);
-    change_env(envp, tp);
-    while (wait(NULL) > 0)
-        ;
-    free (tp);
-    return (0);
+	tp = NULL;
+	status = 0;
+	stdout_fd = dup(STDOUT_FILENO);
+	stdin_fd = dup(STDIN_FILENO);
+	while (cmd)
+	{
+		exec_pipe(cmd, envp, line);
+		cmd = cmd->next;
+	}
+	dup2(stdin_fd, 0);
+	dup2(stdout_fd, 1);
+	waitpid(g_pid, &status, 0);
+	tp = ft_strjoin_f("?=", ft_itoa(status / 256), 2);
+	change_env(envp, tp);
+	while (wait(NULL) > 0)
+		;
+	free (tp);
+	return (0);
 }

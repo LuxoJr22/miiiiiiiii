@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:44:31 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/15 20:00:22 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/15 20:16:25 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,8 @@ char	**ft_export2(char **envp, char **str, int y)
 	{
 		ret = malloc(sizeof(char *) * (size_dptr(envp) + 2));
 		i = 0;
-		while (envp[i])
-		{
+		while (envp[i++])
 			ret[i] = ft_strdup(envp[i]);
-			i ++;
-		}
 		ret[i] = ft_strdup(str[y]);
 		ret[i + 1] = 0;
 		free_dptr(envp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:33:52 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/15 20:04:21 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/15 20:10:55 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	failed_exec(char *tmp, t_cmd *cmd, int fd[2])
 	write(fd[1], "?=127", 6);
 	close(fd[1]);
 	if (cmd->arg[0][0] == '/')
-		tmp = ft_strjoin_f(ft_strjoin_f("Minishell: ",
-				cmd->arg[0], 4), ": No such file or directory\n", 1);
+		tmp = ft_strjoin_f(ft_strjoin_f("Minishell: ", cmd->arg[0], 4),
+				": No such file or directory\n", 1);
 	else
 		tmp = ft_strjoin_f(ft_strjoin_f("Minishell: ",
 					cmd->arg[0], 4), ": command not found\n", 1);
@@ -90,31 +90,31 @@ void	child_process(t_cmd *cmd, char *tmp, int fd[2], char **envp)
 		failed_exec(tmp, cmd, fd);
 }
 
-void    exec_cmd(t_cmd *cmd, char **envp, char *line)
+void	exec_cmd(t_cmd *cmd, char **envp, char *line)
 {
-    char    *tmp;
-    char    *tp;
-    int        fd[2];
-    int        status;
+	char	*tmp;
+	char	*tp;
+	int		fd[2];
+	int		status;
 
-    tmp = NULL;
-    tp = NULL;
-    status = 0;
-    if (pipe(fd) == -1)
-        return ;
-    if (!count_pipe(line) || !cmd->arg[0])
-        g_pid = fork();
-    if (g_pid == 0)
-        child_process(cmd, tmp, fd, envp);
-    else
-    {
-        close(fd[1]);
-        waitpid(g_pid, &status, 0);
-        tp = ft_strjoin_f("?=", ft_itoa(status / 256), 2);
-        change_env(envp, tp);
-        free (tp);
-        get_line(envp, fd[0]);
-        if (cmd->here_doc == 1)
-            g_pid = -3;
-    }
+	tmp = NULL;
+	tp = NULL;
+	status = 0;
+	if (pipe(fd) == -1)
+		return ;
+	if (!count_pipe(line) || !cmd->arg[0])
+		g_pid = fork();
+	if (g_pid == 0)
+		child_process(cmd, tmp, fd, envp);
+	else
+	{
+		close(fd[1]);
+		waitpid(g_pid, &status, 0);
+		tp = ft_strjoin_f("?=", ft_itoa(status / 256), 2);
+		change_env(envp, tp);
+		free (tp);
+		get_line(envp, fd[0]);
+		if (cmd->here_doc == 1)
+			g_pid = -3;
+	}
 }

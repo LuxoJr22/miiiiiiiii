@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/15 20:04:04 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/15 20:15:52 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_cmd {
 pid_t	g_pid;
 
 void	ft_echo(char **str);
+char	**env_change(char **envp, t_cmd *cmd);
 void	ft_env(char **envp);
 int		is_in(char *str, char c);
 char	*process_line(char *str, char **ret, char **envp);

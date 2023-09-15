@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:56:21 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/15 19:49:48 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/15 20:08:12 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	**ft_unset(char **name, char **envp)
 	int	y;
 
 	y = 1;
-	while (name[y])
+	while (name[y++])
 	{
 		if (!is_in(name[y], '?'))
 		{
@@ -48,7 +48,6 @@ char	**ft_unset(char **name, char **envp)
 		}
 		else if (!is_in(name[y], '?'))
 			ft_unset_error(name, envp, y);
-		y ++;
 	}
 	return (envp);
 }
