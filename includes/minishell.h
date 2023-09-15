@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/14 17:43:29 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/15 17:18:13 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ pid_t	g_pid;
 void	ft_echo(char **str);
 void	ft_env(char **envp);
 int		is_in(char *str, char c);
+char	*process_line(char *str, char **ret, char **envp);
 int		is_equal(char *search, char *str);
 void	ft_exit(char **envp, char *arg);
 void	ft_export(char **envp, char **str);

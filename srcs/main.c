@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/15 15:12:51 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/15 17:17:36 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,16 @@ int	built_in(char *command, t_cmd *cmd, char **envp)
 char	**pre_process(char **str, char **envp)
 {
 	int		i;
-	int		y;
 	char	**ret;
 
 	i = -1;
-	y = 1;
 	while (str[++i])
 	{
 		if (is_in_quote(str[i], '$'))
 		{
 			str[i] = reset_quote(str[i]);
 			ret = ft_split(str[i], '$');
-			str[i] = get_line_env(str[i], ret[0], envp);
-			while (ret[y++])
-				str[i] = ft_strjoin_env(str[i], ft_getenv(envp, ret[y]), 3);
-			y = 1;
-			free_dptr(ret);
+			str[i] = process_line(str[i], ret, envp);
 		}
 		else
 			str[i] = reset_quote(str[i]);
