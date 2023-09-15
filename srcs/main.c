@@ -6,7 +6,7 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/15 20:16:06 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/15 20:25:32 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	**loop(char **envn, char *oui, t_cmd *cmd)
 	{
 		add_history(oui);
 		cmd = parsed_line(oui, envn);
-		if (cmd && ((!ft_strcmp(cmd->name, "export")
+		if (cmd && cmd->name && ((!ft_strcmp(cmd->name, "export")
 					&& ft_strlen(cmd->name) == 6)
 				|| (!ft_strcmp(cmd->name, "unset")
 					&& ft_strlen(cmd->name) == 5)))
