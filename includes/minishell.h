@@ -6,7 +6,7 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/15 20:15:52 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/15 20:37:21 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ pid_t	g_pid;
 
 void	ft_echo(char **str);
 char	**env_change(char **envp, t_cmd *cmd);
+char	**ft_split_f(char *s, char c);
 void	ft_env(char **envp);
 int		is_in(char *str, char c);
 char	*process_line(char *str, char **ret, char **envp);

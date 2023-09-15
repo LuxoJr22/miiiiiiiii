@@ -6,7 +6,7 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:33:52 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/15 20:10:55 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/15 21:09:20 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*acces_cmd(char *cmd, char **envp)
 	i = -1;
 	if (!access(cmd, F_OK) && ft_strchr(cmd, '/'))
 		return (ft_strdup(cmd));
-	path = ft_split(ft_getenv(envp, "PATH"), ':');
+	path = ft_split_f(ft_getenv(envp, "PATH"), ':');
 	if (path == 0)
 		return (ft_strdup(cmd));
 	while (path[++i])
