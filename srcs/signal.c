@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:51:49 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/15 15:47:21 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/15 18:10:33 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	ft_handle_ctrl_slash(int signal)
 		rl_redisplay();
 		kill(g_pid, SIGTERM);
 		g_pid = -2;
-		printf("%d\n", g_pid);
 		write(1, "Quit\n", 5);
 	}
 }

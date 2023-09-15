@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:44:31 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/13 16:26:31 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/15 20:00:22 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,14 @@ void	change_env(char **envp, char *str)
 	}
 }
 
-void	ft_export2(char **envp, char **str, int y)
+char	**ft_export2(char **envp, char **str, int y)
 {
-	int	i;
+	int		i;
+	char	**ret;
 
 	i = 0;
 	while (envp[i] && !is_env(envp[i], str[y]))
-	{
 		i ++;
-	}
 	if (envp[i] && is_in(str[y], '='))
 	{
 		free(envp[i]);
@@ -44,10 +43,19 @@ void	ft_export2(char **envp, char **str, int y)
 	}
 	else if (!envp[i])
 	{
-		free(envp[i]);
-		envp[i] = ft_strdup(str[y]);
-		envp[i + 1] = 0;
+		ret = malloc(sizeof(char *) * (size_dptr(envp) + 2));
+		i = 0;
+		while (envp[i])
+		{
+			ret[i] = ft_strdup(envp[i]);
+			i ++;
+		}
+		ret[i] = ft_strdup(str[y]);
+		ret[i + 1] = 0;
+		free_dptr(envp);
+		envp = ret;
 	}
+	return (envp);
 }
 
 void	ft_export_empty(char **envp)
@@ -69,7 +77,7 @@ void	ft_export_empty(char **envp)
 	return ;
 }
 
-void	ft_export(char **envp, char **str)
+char	**ft_export(char **envp, char **str)
 {
 	int		y;
 
@@ -77,12 +85,12 @@ void	ft_export(char **envp, char **str)
 	if (str[1] == 0)
 	{
 		ft_export_empty(envp);
-		return ;
+		return (envp);
 	}
 	while (str[y])
 	{
 		if (ft_isalpha(str[y][0]) && !is_in(str[y], '?'))
-			ft_export2(envp, str, y);
+			envp = ft_export2(envp, str, y);
 		else
 		{
 			if (!(is_in(str[y], '?') && (ft_strlen(str[y]) < 2)))
@@ -95,4 +103,5 @@ void	ft_export(char **envp, char **str)
 		}
 		y ++;
 	}
+	return (envp);
 }

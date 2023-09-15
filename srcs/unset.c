@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:56:21 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/13 16:15:50 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/15 19:49:48 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_unset_error(char **name, char **envp, int y)
 	}
 }
 
-void	ft_unset(char **name, char **envp)
+char	**ft_unset(char **name, char **envp)
 {
 	int	i;
 	int	y;
@@ -34,17 +34,21 @@ void	ft_unset(char **name, char **envp)
 		if (!is_in(name[y], '?'))
 		{
 			i = index_env(name[y], envp) + 1;
-			free(envp[i - 1]);
-			while (i != -1 && envp[i])
+			if (i)
 			{
-				envp[i - 1] = envp[i];
-				i ++;
+				free(envp[i - 1]);
+				while (i != -1 && envp[i])
+				{
+					envp[i - 1] = envp[i];
+					i ++;
+				}
+				if (i != -1)
+					envp[i - 1] = 0;
 			}
-			if (i != -1)
-				envp[i - 1] = 0;
 		}
-		else
+		else if (!is_in(name[y], '?'))
 			ft_unset_error(name, envp, y);
 		y ++;
 	}
+	return (envp);
 }

@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/15 17:17:36 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/15 19:48:35 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,10 @@ int	built_in(char *command, t_cmd *cmd, char **envp)
 		ft_echo(cmd->arg);
 	else if (!cmd->here_doc && is_equal("pwd", command))
 		ft_pwd(envp);
-	else if (!cmd->here_doc && is_equal("export", command))
-		ft_export(envp, cmd->arg);
 	else if (!cmd->here_doc && is_equal("env", command) && !cmd->arg[1])
 		ft_env(envp);
 	else if (!cmd->here_doc && is_equal("exit", command))
-		ft_exit(envp, cmd->arg[1]);
-	else if (!cmd->here_doc && is_equal("unset", command))
-		ft_unset(cmd->arg, envp);
+		ft_exit(envp, cmd->arg);
 	else if (!cmd->here_doc && is_equal("cd", command))
 		ft_cd(cmd->arg[1], envp);
 	else
@@ -78,12 +74,17 @@ char	**init_env(char **envp)
 	return (envn);
 }
 
-char	*loop(char **envn, char *oui, t_cmd *cmd)
+char	**env_change(char **envp, t_cmd *cmd)
 {
-	free(oui);
-	oui = readline("Minishell>");
-	if (g_pid == -5)
-		change_env(envn, "?=0");
+	if (!cmd->here_doc && is_equal("export", cmd->name))
+		envp = ft_export(envp, cmd->arg);
+	else if (!cmd->here_doc && is_equal("unset", cmd->name))
+		envp = ft_unset(cmd->arg, envp);
+	return (envp);
+}
+
+char	**loop(char **envn, char *oui, t_cmd *cmd)
+{
 	if (g_pid == -2)
 		change_env(envn, "?=131");
 	if (g_pid == -3)
@@ -94,13 +95,16 @@ char	*loop(char **envn, char *oui, t_cmd *cmd)
 	{
 		add_history(oui);
 		cmd = parsed_line(oui, envn);
-		if (cmd)
+		if (cmd && ((!ft_strcmp(cmd->name, "export") && ft_strlen(cmd->name) == 6)
+			|| (!ft_strcmp(cmd->name, "unset") && ft_strlen(cmd->name) == 5)))
+			envn = env_change(envn, cmd);
+		else if (cmd)
 			manage_exec(oui, envn, cmd);
 		free_list(cmd);
 	}
 	else
 		change_env(envn, "?=0");
-	return (oui);
+	return (envn);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -120,7 +124,9 @@ int	main(int ac, char **av, char **envp)
 	oui = getcwd(NULL, 0);
 	while (oui != 0)
 	{
-		oui = loop(envn, oui, cmd);
+		free(oui);
+		oui = readline("Minishell>");
+		envn = loop(envn, oui, cmd);
 	}
 	i = ft_atoi_f(ft_getenv(envn, "?"));
 	free_dptr(envn);

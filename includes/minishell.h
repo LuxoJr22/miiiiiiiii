@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/15 17:18:13 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/15 20:04:04 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ void	ft_env(char **envp);
 int		is_in(char *str, char c);
 char	*process_line(char *str, char **ret, char **envp);
 int		is_equal(char *search, char *str);
-void	ft_exit(char **envp, char *arg);
-void	ft_export(char **envp, char **str);
-void	ft_unset(char **name, char **envp);
+void	ft_exit(char **envp, char **arg);
+char	**ft_export(char **envp, char **str);
+char	**ft_unset(char **name, char **envp);
 void	ft_cd(char *path, char **envp);
 int		ft_atoi_f(char *str);
 char	**split_path(char **envp);
-char	*acces_cmd(char *cmd);
+char	*acces_cmd(char *cmdn, char **envp);
 char	*ft_quote(char *str);
 void	free_dptr(char	**dptr);
 void	exec_cmd(t_cmd *cmd, char **envp, char *line);

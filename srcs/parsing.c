@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 17:50:17 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/15 16:00:03 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/15 20:03:54 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	get_commands(char *line, t_cmd *cmd, char **envp)
 		call_parsing_redir(cmd, line);
 		pre_process(cmd->arg, envp);
 		if (cmd->arg[0])
-			cmd->name = acces_cmd(cmd->arg[0]);
+			cmd->name = acces_cmd(cmd->arg[0], envp);
 		if (cmds[i + 1])
 		{
 			cmd->next = malloc(sizeof(t_cmd));
