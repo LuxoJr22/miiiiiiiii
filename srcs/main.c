@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/14 17:43:40 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/15 13:54:15 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	**init_env(char **envp)
 	if (!size_dptr(envp))
 	{
 		envn = malloc(sizeof(char *) * (5));
-		envn[0] = ft_strdup("PWD=/home/luxojr/project/mini");
+		envn[0] = ft_strjoin_f("PWD=", getcwd(NULL, 0), 4);
 		envn[1] = ft_strdup("SHLVL=1");
 		envn[2] = ft_strdup("_=/usr/bin/env");
 		i = 3;

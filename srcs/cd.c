@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:42:38 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/13 18:56:51 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/15 13:34:56 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,5 @@ void	ft_cd(char *path, char **envp)
 	y = index_env("PWD", envp);
 	free(envp[y]);
 	envp[y] = ft_strjoin_f("PWD=", getcwd(NULL, 0), 2);
-	free (i);
+	closedir(i);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:51:49 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/13 16:52:51 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/15 13:47:26 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_handle_ctrlc(int signal)
 	}
 	else
 	{
-		write(1, "^C\n", 3);
+		write(1, "^Ca\n", 3);
 		kill(g_pid, SIGTERM);
 		g_pid = -5;
 	}
