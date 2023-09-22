@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec_second.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 12:36:16 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/13 12:41:15 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:10:09 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ char	*get_line_env(char *str, char *ret, char **envp)
 	{
 		free(str);
 		str = ft_getenv(envp, ret);
+		if (!str)
+			str = ft_strdup("");
 	}
 	else
 	{

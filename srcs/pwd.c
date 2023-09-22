@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 09:54:40 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/15 20:15:41 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:35:12 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,31 @@ char	**env_change(char **envp, t_cmd *cmd)
 	else if (!cmd->here_doc && is_equal("unset", cmd->name))
 		envp = ft_unset(cmd->arg, envp);
 	return (envp);
+}
+
+int	ft_in_env(char *str, char **envp)
+{
+	char	**ret;
+	char	*test;
+	int		i;
+
+	i = 0;
+	if (str[0] == '$')
+	{
+		ret = ft_split(str, '$');
+		while (ret[i])
+		{
+			test = ft_getenv(envp, ret[i]);
+			if (test)
+			{
+				free_dptr(ret);
+				free(test);
+				return (1);
+			}
+			i ++;
+		}
+		free_dptr(ret);
+		return (0);
+	}
+	return (1);
 }

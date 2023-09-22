@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:58:59 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/15 18:35:18 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/22 14:43:51 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ void	ft_exit(char **envp, char	**arg)
 		ft_putstr_fd("Minishell: exit: ", 2);
 		ft_putstr_fd(arg[1], 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
+		exit (255);
 	}
 	else if (arg[1] && arg[2])
 	{
 		ft_putstr_fd("Minishell: exit: : too many arguments\n", 2);
+		exit (1);
 	}
 	if (arg[1] && !ft_isnum(arg[1]) && i == 0)
 		i = 255;

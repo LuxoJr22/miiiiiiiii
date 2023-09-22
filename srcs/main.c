@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/22 13:46:36 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:34:53 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern pid_t	g_pid;
 
 int	built_in(char *command, t_cmd *cmd, char **envp)
 {
@@ -29,11 +31,13 @@ int	built_in(char *command, t_cmd *cmd, char **envp)
 	return (1);
 }
 
-char	**pre_process(char **str, char **envp)
+char	**pre_process(t_cmd *cmd, char **envp)
 {
 	int		i;
 	char	**ret;
+	char	**str;
 
+	str = cmd->arg;
 	i = -1;
 	while (str[++i])
 	{

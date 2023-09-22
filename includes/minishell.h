@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/22 13:43:07 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:25:58 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int		is_in(char *str, char c);
 char	*process_line(char *str, char **ret, char **envp);
 int		is_equal(char *search, char *str);
 void	ft_exit(char **envp, char **arg);
+void	process_redirect(char **envp, t_cmd *cmd);
 char	**ft_export(char **envp, char **str);
 char	**ft_unset(char **name, char **envp);
 void	ft_cd(char *path, char **envp);
@@ -67,7 +68,7 @@ char	*str_lower(char *str);
 void	rl_replace_line(const char *text, int clear_undo);
 int		count_pipe(char *line);
 char	*ft_strjoin_env(char *s1, char *s2, int mode);
-char	**pre_process(char **str, char **envp);
+char	**pre_process(t_cmd *cmd, char **envp);
 char	**ft_split_parse(char const *s, int mode);
 int		manage_pipe(t_cmd *cmd, char **envp, char *line);
 void	get_command(t_cmd *cmd, char **envp, char *line);
@@ -98,6 +99,7 @@ char	*ft_getenv(char **envp, char *str);
 char	**ft_fill_pa(char const *s, int mode, char **r_str, int verif);
 int		index_env(char *name, char **envp);
 int		is_env(char	*env, char	*str);
+int		ft_in_env(char *str, char **envp);
 int		ft_is_charset_pa(char const s, int mode);
 char	*ft_fill_str_pa(char const *s, int start, int end, char c);
 void	parsing_en_here_doc(t_cmd *cmd, t_file *file, int coor[2]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 17:50:17 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/22 13:42:16 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/22 14:59:29 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	get_commands(char *line, t_cmd *cmd, char **envp)
 		cmd->arg = ft_split_parse(cmds[i], 2);
 		cmd->here_doc = 0;
 		call_parsing_redir(cmd, line);
-		pre_process(cmd->arg, envp);
+		pre_process(cmd, envp);
 		if (cmd->arg[0])
 			cmd->name = acces_cmd(cmd->arg[0], envp);
 		if (cmds[i + 1])
