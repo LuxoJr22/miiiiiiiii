@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_parse_two.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:45:36 by sforesti          #+#    #+#             */
-/*   Updated: 2023/07/05 03:14:55 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/22 13:40:10 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_fill_two(int quote, char const *s, char c, int i)
+int	ft_fill_two(int quote, char const *s, int mode, int i)
 {
-	while (s[i] && (!ft_is_charset_pa(s[i], c) || quote))
+	while (s[i] && (!ft_is_charset_pa(s[i], mode) || quote))
 	{
 		if ((s[i] == 39 || s[i] == 34) && quote == 0)
 			quote = s[i];
@@ -25,7 +25,7 @@ int	ft_fill_two(int quote, char const *s, char c, int i)
 	return (i);
 }
 
-char	**ft_fill_pa(char const *s, char c, char **r_str, int verif)
+char	**ft_fill_pa(char const *s, int mode, char **r_str, int verif)
 {
 	int	i;
 	int	j;
@@ -40,14 +40,14 @@ char	**ft_fill_pa(char const *s, char c, char **r_str, int verif)
 	quote = 0;
 	while (s[i] && !verif)
 	{
-		while (s[i] && ft_is_charset_pa(s[i], c))
+		while (s[i] && ft_is_charset_pa(s[i], mode))
 			i++;
 		start = i;
-		end = ft_fill_two(quote, s, c, i);
+		end = ft_fill_two(quote, s, mode, i);
 		i = end;
-		while (s[i] && ft_is_charset_pa(s[i], c))
+		while (s[i] && ft_is_charset_pa(s[i], mode))
 			i++;
-		r_str[j] = ft_fill_str_pa(s, start, end, c);
+		r_str[j] = ft_fill_str_pa(s, start, end, mode);
 		j ++;
 	}
 	r_str[j] = 0;

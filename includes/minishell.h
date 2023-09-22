@@ -6,7 +6,7 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/15 20:37:21 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/22 13:43:07 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	rl_replace_line(const char *text, int clear_undo);
 int		count_pipe(char *line);
 char	*ft_strjoin_env(char *s1, char *s2, int mode);
 char	**pre_process(char **str, char **envp);
-char	**ft_split_parse(char const *s, char c);
+char	**ft_split_parse(char const *s, int mode);
 int		manage_pipe(t_cmd *cmd, char **envp, char *line);
 void	get_command(t_cmd *cmd, char **envp, char *line);
 int		size_dptr(char **str);
@@ -95,10 +95,10 @@ void	quit(int i);
 void	handle_ctrl(void);
 void	interrupt(int i);
 char	*ft_getenv(char **envp, char *str);
-char	**ft_fill_pa(char const *s, char c, char **r_str, int verif);
+char	**ft_fill_pa(char const *s, int mode, char **r_str, int verif);
 int		index_env(char *name, char **envp);
 int		is_env(char	*env, char	*str);
-int		ft_is_charset_pa(char const s, char c);
+int		ft_is_charset_pa(char const s, int mode);
 char	*ft_fill_str_pa(char const *s, int start, int end, char c);
 void	parsing_en_here_doc(t_cmd *cmd, t_file *file, int coor[2]);
 void	parsing_en(t_cmd *cmd, t_file *file, int coor[2]);

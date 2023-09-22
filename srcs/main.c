@@ -6,7 +6,7 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/15 20:25:32 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/22 13:46:36 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ char	**loop(char **envn, char *oui, t_cmd *cmd)
 			manage_exec(oui, envn, cmd);
 		free_list(cmd);
 	}
-	else
-		change_env(envn, "?=0");
 	return (envn);
 }
 

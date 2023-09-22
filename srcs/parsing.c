@@ -6,7 +6,7 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 17:50:17 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/15 21:12:25 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/22 13:42:16 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void	get_commands(char *line, t_cmd *cmd, char **envp)
 	int		i;
 
 	i = 0;
-	cmds = ft_split_parse(line, '|');
+	cmds = ft_split_parse(line, 1);
 	while (cmds[i])
 	{
 		init_struct(cmd);
-		cmd->arg = ft_split_parse(cmds[i], ' ');
+		cmd->arg = ft_split_parse(cmds[i], 2);
 		cmd->here_doc = 0;
 		call_parsing_redir(cmd, line);
 		pre_process(cmd->arg, envp);
