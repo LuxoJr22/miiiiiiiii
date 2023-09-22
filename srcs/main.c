@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/22 16:34:53 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/22 16:41:02 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char	**pre_process(t_cmd *cmd, char **envp)
 		else
 			str[i] = reset_quote(str[i]);
 	}
+	process_redirect(envp, cmd);
 	return (NULL);
 }
 
