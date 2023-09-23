@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:56:21 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/22 16:47:32 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/23 12:33:21 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	process_redirect(char **envp, t_cmd *cmd)
 				ft_putstr_fd(": ambiguous redirect\n", 2);
 				cmd->here_doc = 1;
 				cmd->file->type = 1;
+				return ;
 			}
 			ret = ft_split(cmd->file->fd_file, '$');
 			cmd->file->fd_file = process_line(cmd->file->fd_file, ret, envp);
