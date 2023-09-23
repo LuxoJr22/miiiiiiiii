@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:56:21 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/23 12:33:21 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/23 21:19:37 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ void	process_redirect(char **envp, t_cmd *cmd)
 {
 	char	**ret;
 
-	if (cmd->file)
+	if (cmd->file )
 	{
-		if (is_in_quote(cmd->file->fd_file, '$'))
+		if (is_in_quote(cmd->file->fd_file, '$') && cmd->file->type != 3)
 		{
 			cmd->file->fd_file = reset_quote(cmd->file->fd_file);
 			if (!ft_in_env(cmd->file->fd_file, envp))
