@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:33:52 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/15 21:09:20 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/24 17:11:41 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	exec_cmd(t_cmd *cmd, char **envp, char *line)
 	{
 		close(fd[1]);
 		waitpid(g_pid, &status, 0);
-		tp = ft_strjoin_f("?=", ft_itoa(status / 256), 2);
+		tp = ft_strjoin_f("?=", ft_itoa(status % 255), 2);
 		change_env(envp, tp);
 		free (tp);
 		get_line(envp, fd[0]);

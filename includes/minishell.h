@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/22 16:25:58 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/24 17:12:05 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int		find_name(char	**str, int mode);
 t_cmd	*manage_cmd(char *line, char **envp);
 void	manage_exec(char *line, char **envp, t_cmd *cmd);
 t_cmd	*parse_path(t_cmd *cmd, char *path);
+void	ft_handle_ctrlc(int signal);
 void	exec_for_pipe(t_cmd *cmd, char **envp);
 int		create_infile(char *limiter, char **envp);
 void	redirect_ex_cmd_basic(t_file *file);
