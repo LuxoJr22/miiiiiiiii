@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 12:07:17 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/24 17:17:22 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/24 17:38:10 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,6 @@ void	manage_exec(char *line, char **envp, t_cmd *cmd)
 		get_command(cmd, envp, line);
 }
 
-void	fonction(int signal)
-{
-	(void)signal;
-}
-
 void	get_command(t_cmd *cmd, char **envp, char *line)
 {
 	char	*command;
@@ -97,18 +92,14 @@ void	get_command(t_cmd *cmd, char **envp, char *line)
 		dup2(cmd->in, STDIN_FILENO);
 	if (cmd->out && cmd->out != -1)
 		dup2(cmd->out, STDOUT_FILENO);
-	boolean = built_in(command, cmd, envp);
+	boolean = built_in(command, cmd, envp, line);
 	dup2(stdin_me, 0);
 	dup2(stdout_me, 1);
 	if (!boolean)
 	{
-		if (is_equal("./minishell", command))
-			signal(SIGINT, fonction);
 		exec_cmd(cmd, envp, line);
 		if (!count_pipe(line) || command == NULL)
 			waitpid(-1, NULL, 0);
-		if (is_equal("./minishell", command))
-			signal(SIGINT, ft_handle_ctrlc);
 	}
 	free(command);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/24 17:12:05 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/24 17:38:27 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct s_cmd {
 pid_t	g_pid;
 
 void	ft_echo(char **str);
+void	fonction(int signal);
+void	exec_minishell(char *command, char **envp, t_cmd *cmd, char *line);
 char	**env_change(char **envp, t_cmd *cmd);
 char	**ft_split_f(char *s, char c);
 void	ft_env(char **envp);
@@ -75,6 +77,7 @@ void	get_command(t_cmd *cmd, char **envp, char *line);
 int		size_dptr(char **str);
 t_cmd	*init_cmd_pipe(char *line, char **envp);
 void	cmd_with_path(t_cmd *cmd, char	*path, char **envp);
+void	ft_handle_ctrl_slash(int signal);
 char	*join_path(char **str);
 t_cmd	*init_cmd_basic(t_cmd *cmd, char *line, char **envp);
 int		find_name(char	**str, int mode);
@@ -118,7 +121,7 @@ int		is_good_name_var(char *str, int i);
 char	*dup_name_var(int i, char *str, char *word);
 char	*free_dptr_line(char **dptr, char *str);
 int		is_in_quote(char *str, char c);
-int		built_in(char *command, t_cmd *cmd, char **envp);
+int		built_in(char *command, t_cmd *cmd, char **envp, char *line);
 void	ft_init_signals(void);
 void	verif_limiter(char *line, char *limiter);
 char	*fd_to_str(int fd[2]);

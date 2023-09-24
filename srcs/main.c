@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/24 17:02:37 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/24 17:37:47 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern pid_t	g_pid;
 
-int	built_in(char *command, t_cmd *cmd, char **envp)
+int	built_in(char *command, t_cmd *cmd, char **envp, char *line)
 {
 	if (!cmd->here_doc && is_equal("echo", command))
 		ft_echo(cmd->arg);
@@ -26,6 +26,8 @@ int	built_in(char *command, t_cmd *cmd, char **envp)
 		ft_exit(envp, cmd->arg);
 	else if (!cmd->here_doc && is_equal("cd", command))
 		ft_cd(cmd->arg[1], envp);
+	else if (!cmd->here_doc && is_equal("./minishell", command))
+		exec_minishell(command, envp, cmd, line);
 	else
 		return (0);
 	return (1);
