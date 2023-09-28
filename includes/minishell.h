@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/24 17:38:27 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:18:05 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ char	**pre_process(t_cmd *cmd, char **envp);
 char	**ft_split_parse(char const *s, int mode);
 int		manage_pipe(t_cmd *cmd, char **envp, char *line);
 void	get_command(t_cmd *cmd, char **envp, char *line);
+char	*ft_cutenv(char *str);
 int		size_dptr(char **str);
 t_cmd	*init_cmd_pipe(char *line, char **envp);
 void	cmd_with_path(t_cmd *cmd, char	*path, char **envp);

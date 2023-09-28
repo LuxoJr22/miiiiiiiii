@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/24 17:37:47 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:32:26 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ char	**pre_process(t_cmd *cmd, char **envp)
 char	**init_env(char **envp)
 {
 	char	**envn;
+	char	*str;
 	int		i;
+	int		lvl;
 
 	i = -1;
 	if (!size_dptr(envp))
@@ -72,9 +74,17 @@ char	**init_env(char **envp)
 	}
 	else
 	{
+		lvl = ft_atoi_f(ft_getenv(envp, "SHLVL"));
 		envn = malloc(sizeof(char *) * (size_dptr(envp) + 2));
 		while (envp[++i])
-			envn[i] = ft_strdup(envp[i]);
+		{
+			str = ft_cutenv(envp[i]);
+			if (!strcmp("SHLVL", str))
+				envn[i] = ft_strjoin_f("SHLVL=", ft_itoa(lvl + 1), 2);
+			else
+				envn[i] = ft_strdup(envp[i]);
+			free(str);
+		}
 	}
 	envn[i] = ft_strdup("?=0");
 	envn[i + 1] = 0;
