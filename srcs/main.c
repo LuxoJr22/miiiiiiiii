@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/29 00:23:58 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/29 00:26:28 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ char	**init_env(char **envp)
 	{
 		lvl = ft_atoi_f(ft_getenv(envp, "SHLVL"));
 		envn = malloc(sizeof(char *) * (size_dptr(envp) + 2));
-		while (envp[++i])
-			fill_envp(envn, envp, i, lvl);
+		i = fill_envp(envn, envp, i, lvl);
 	}
 	envn[i] = ft_strdup("?=0");
 	envn[i + 1] = 0;

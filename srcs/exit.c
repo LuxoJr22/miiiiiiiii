@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:58:59 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/29 00:23:17 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/29 00:26:23 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_exit(char **envp, char	**arg)
 	exit (i);
 }
 
-void	fill_envp(char **envn, char **envp, int i, int lvl)
+int	fill_envp(char **envn, char **envp, int i, int lvl)
 {
 	char	*str;
 
@@ -64,4 +64,5 @@ void	fill_envp(char **envn, char **envp, int i, int lvl)
 			envn[i] = ft_strdup(envp[i]);
 		free(str);
 	}
+	return (i);
 }
