@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 12:36:16 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/22 16:10:09 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/28 17:29:38 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ char	*free_dptr_line(char **dptr, char *str)
 {
 	char	*ret;
 
+	if (str == NULL)
+		return (NULL);
 	ret = ft_strdup(str);
 	free_dptr(dptr);
 	return (ret);

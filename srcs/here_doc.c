@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 13:29:31 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/12 18:23:22 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/28 16:57:02 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char	*read_input(char *limiter, char *line)
 	else
 	{
 		waitpid(g_pid, NULL, 0);
+		if (g_pid == -4)
+			return (0);
 		close (fd[1]);
 		return (fd_to_str(fd));
 	}

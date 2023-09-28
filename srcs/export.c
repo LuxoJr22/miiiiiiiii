@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:44:31 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/15 21:20:19 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/28 17:21:47 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,67 @@ char	**ft_export2(char **envp, char **str, int y)
 	return (envp);
 }
 
-void	ft_export_empty(char **envp)
+void	sort_empty(char	**envp)
 {
-	char	*quotes;
 	int		i;
+	int		index;
+	int		k;
+	char	*str;
 
 	i = 0;
 	while (envp[i])
 	{
-		if (envp[i][0] != '?')
+		k = i;
+		str = envp[k];
+		index = k;
+		while (envp[k])
 		{
-			quotes = ft_quote(envp[i]);
+			if (ft_strcmp(str, envp[k]) > 0)
+			{
+				str = envp[k];
+				index = k;
+			}
+			k ++;
+		}
+		if (i != k)
+		{
+			str = ft_strdup(envp[index]);
+			free(envp[index]);
+			envp[index] = ft_strdup(envp[i]);
+			free(envp[i]);
+			envp[i] = str;
+		}
+		i ++;
+	}
+}
+
+void	ft_export_empty(char **envp)
+{
+	char	*quotes;
+	char	**ret;
+	int		i;
+
+	i = 0;
+	ret = malloc(sizeof(char *) * (size_dptr(envp) + 1));
+	while (envp[i])
+	{
+		ret[i] = ft_strdup(envp[i]);
+		i ++;
+	}
+	ret[i] = 0;
+	sort_empty(ret);
+	i = 0;
+	while (ret[i])
+	{
+		if (ret[i][0] != '?')
+		{
+			quotes = ft_quote(ret[i]);
 			printf("declare -x %s\n", quotes);
 			free(quotes);
 		}
 		i ++;
 	}
+	free_dptr(ret);
 	return ;
 }
 

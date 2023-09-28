@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:51:49 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/15 18:10:33 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/28 16:56:27 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ void	ft_handle_ctrlc(int signal)
 	}
 	else
 	{
-		write(1, "^C\n", 3);
-		kill(g_pid, SIGTERM);
 		g_pid = -5;
 	}
 }

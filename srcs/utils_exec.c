@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:33:52 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/24 17:11:41 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/28 17:27:31 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,21 @@ char	*acces_cmd(char *cmd, char **envp)
 	return (ft_strdup(cmd));
 }
 
-void	failed_exec(char *tmp, t_cmd *cmd, int fd[2])
+void	failed_exec(char *tmp, t_cmd *cmd, int fd[2], char **envp)
 {
+	char	*str;
+
+	str = ft_getenv(envp, "PATH");
 	write(fd[1], "?=127", 6);
 	close(fd[1]);
-	if (cmd->arg[0][0] == '/')
+	if (cmd->arg[0][0] == '/' || !str)
 		tmp = ft_strjoin_f(ft_strjoin_f("Minishell: ", cmd->arg[0], 4),
 				": No such file or directory\n", 1);
 	else
 		tmp = ft_strjoin_f(ft_strjoin_f("Minishell: ",
 					cmd->arg[0], 4), ": command not found\n", 1);
+	if (str)
+		free(str);
 	ft_putstr_fd(tmp, 2);
 	free(tmp);
 	exit(127);
@@ -87,7 +92,7 @@ void	child_process(t_cmd *cmd, char *tmp, int fd[2], char **envp)
 		|| (cmd->here_doc && cmd->file->type == 1))
 		exit (1);
 	if (status == -1)
-		failed_exec(tmp, cmd, fd);
+		failed_exec(tmp, cmd, fd, envp);
 }
 
 void	exec_cmd(t_cmd *cmd, char **envp, char *line)
