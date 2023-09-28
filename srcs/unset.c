@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:56:21 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/24 17:39:18 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/29 00:18:12 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,15 @@ void	process_redirect(char **envp, t_cmd *cmd)
 		else
 			cmd->file->fd_file = reset_quote(cmd->file->fd_file);
 	}
+}
+
+void	export_sort(char **envp, int i, int index)
+{
+	char	*str;
+
+	str = ft_strdup(envp[index]);
+	free(envp[index]);
+	envp[index] = ft_strdup(envp[i]);
+	free(envp[i]);
+	envp[i] = str;
 }

@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/28 15:18:05 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/29 00:23:28 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ int		is_in_quote(char *str, char c);
 int		built_in(char *command, t_cmd *cmd, char **envp, char *line);
 void	ft_init_signals(void);
 void	verif_limiter(char *line, char *limiter);
+void	export_sort(char **envp, int i, int index);
+void	fill_envp(char **envn, char **envp, int i, int lvl);
 char	*fd_to_str(int fd[2]);
 void	change_env(char **envp, char *str);
 int		verif(char *line);

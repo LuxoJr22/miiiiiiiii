@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:44:31 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/28 17:21:47 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/29 00:17:26 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,7 @@ void	sort_empty(char	**envp)
 			k ++;
 		}
 		if (i != k)
-		{
-			str = ft_strdup(envp[index]);
-			free(envp[index]);
-			envp[index] = ft_strdup(envp[i]);
-			free(envp[i]);
-			envp[i] = str;
-		}
+			export_sort(envp, i, index);
 		i ++;
 	}
 }
@@ -95,13 +89,10 @@ void	ft_export_empty(char **envp)
 	char	**ret;
 	int		i;
 
-	i = 0;
+	i = -1;
 	ret = malloc(sizeof(char *) * (size_dptr(envp) + 1));
-	while (envp[i])
-	{
+	while (envp[++i])
 		ret[i] = ft_strdup(envp[i]);
-		i ++;
-	}
 	ret[i] = 0;
 	sort_empty(ret);
 	i = 0;
