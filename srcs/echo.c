@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 19:26:40 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/28 16:23:22 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/29 18:32:31 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ void	ft_echo(char **str)
 		printf("\n");
 		return ;
 	}
-	if (is_equal_n("-n", str[1]))
+	if (str[i] && is_equal_n("-n", str[1]))
 	{
 		i = 1;
 		last = 0;
-		while (is_equal_n("-n", str[i]))
+		while (str[i] && is_equal_n("-n", str[i]))
 			i ++;
 		i --;
 	}

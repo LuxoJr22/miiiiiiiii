@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/29 00:26:37 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/29 19:09:58 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_cmd {
 	struct s_cmd	*next;
 }				t_cmd;
 
-pid_t	g_pid;
+extern pid_t	g_pid;
 
 void	ft_echo(char **str);
 void	fonction(int signal);
@@ -73,7 +73,7 @@ char	*ft_strjoin_env(char *s1, char *s2, int mode);
 char	**pre_process(t_cmd *cmd, char **envp);
 char	**ft_split_parse(char const *s, int mode);
 int		manage_pipe(t_cmd *cmd, char **envp, char *line);
-void	get_command(t_cmd *cmd, char **envp, char *line);
+int		get_command(t_cmd *cmd, char **envp, char *line);
 char	*ft_cutenv(char *str);
 int		size_dptr(char **str);
 t_cmd	*init_cmd_pipe(char *line, char **envp);

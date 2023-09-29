@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 12:07:17 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/24 17:38:10 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/29 19:04:41 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	manage_exec(char *line, char **envp, t_cmd *cmd)
 		get_command(cmd, envp, line);
 }
 
-void	get_command(t_cmd *cmd, char **envp, char *line)
+int	get_command(t_cmd *cmd, char **envp, char *line)
 {
 	char	*command;
 	int		stdin_me;
@@ -102,4 +102,5 @@ void	get_command(t_cmd *cmd, char **envp, char *line)
 			waitpid(-1, NULL, 0);
 	}
 	free(command);
+	return (boolean);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 19:24:07 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/15 21:05:07 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/09/29 18:30:47 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ char	*ft_quote(char *str)
 		i ++;
 	}
 	if (off > 0)
-		ret[i + off] = '"';
-	ret[i + off + 1] = '\0';
+		ret[i + off++] = '"';
+	ret[i + off] = '\0';
 	return (ret);
 }
 

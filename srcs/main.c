@@ -6,13 +6,13 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/29 00:26:28 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/09/29 19:09:59 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern pid_t	g_pid;
+pid_t	g_pid;
 
 int	built_in(char *command, t_cmd *cmd, char **envp, char *line)
 {
@@ -88,7 +88,7 @@ char	**loop(char **envn, char *oui, t_cmd *cmd)
 		change_env(envn, "?=131");
 	if (g_pid == -3)
 		change_env(envn, "?=1");
-	if (g_pid == -4)
+	if (g_pid == -4 || g_pid == -5)
 		change_env(envn, "?=130");
 	if (oui && *oui)
 	{
