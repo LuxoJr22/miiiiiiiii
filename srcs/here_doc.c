@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 13:29:31 by sforesti          #+#    #+#             */
-/*   Updated: 2023/10/03 18:33:27 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/10/03 18:43:12 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*read_input(char *limiter, char *line)
 	else
 	{
 		waitpid(g_pid, NULL, 0);
-		if (g_pid == -4)
+		if (g_pid == -3)
 			return (0);
 		close (fd[1]);
 		return (fd_to_str(fd));

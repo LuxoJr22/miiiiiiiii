@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:33:52 by sforesti          #+#    #+#             */
-/*   Updated: 2023/10/03 18:36:11 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/10/03 18:39:17 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	failed_exec(char *tmp, t_cmd *cmd, int fd[2], char **envp)
 {
 	char	*str;
 
+	while (wait(NULL) > 0)
+		;
 	str = ft_getenv(envp, "PATH");
 	close(fd[1]);
 	if (cmd->arg[0][0] == '/' || !str)
