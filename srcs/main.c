@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:25:01 by mboyer            #+#    #+#             */
-/*   Updated: 2023/09/29 19:09:59 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/10/03 15:03:20 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ char	**loop(char **envn, char *oui, t_cmd *cmd)
 			manage_exec(oui, envn, cmd);
 		free_list(cmd);
 	}
+	else
+		change_env(envn, "?=0");
 	return (envn);
 }
 

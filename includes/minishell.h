@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/29 19:09:58 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/10/03 15:39:42 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,6 @@ int		fill_envp(char **envn, char **envp, int i, int lvl);
 char	*fd_to_str(int fd[2]);
 void	change_env(char **envp, char *str);
 int		verif(char *line);
-char	*get_line_env(char *str, char *ret, char **envp);
+char	*get_line_env(char *str, char *ret);
 
 #endif

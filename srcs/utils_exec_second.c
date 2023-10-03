@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 12:36:16 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/28 17:29:38 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/10/03 15:38:49 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,12 @@ char	*reset_quote(char *str)
 	return (ret);
 }
 
-char	*get_line_env(char *str, char *ret, char **envp)
+char	*get_line_env(char *str, char *ret)
 {
 	if (str[0] == '$')
 	{
 		free(str);
-		str = ft_getenv(envp, ret);
-		if (!str)
-			str = ft_strdup("");
+		str = ft_strdup("");
 	}
 	else
 	{

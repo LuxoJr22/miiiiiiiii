@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 09:54:40 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/22 16:35:12 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/10/03 15:55:16 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,19 @@ char	*process_line(char *str, char **ret, char **envp)
 	int		y;
 	char	**env_name;
 
-	y = 0;
-	str = get_line_env(str, ret[0], envp);
-	while (ret[y ++])
+	y = -1;
+	if (str[0] != '$')
+		y ++;
+	str = get_line_env(str, ret[0]);
+	while (ret[++y])
 	{
-		if (ret[y] && ret[y][0] == '?')
+		if (ret[y])
 		{
-			str = ft_strjoin_env(str, ft_getenv(envp, "?"), 3);
-			env_name = ft_split(ret[y], '?');
-			str = ft_strjoin_env(str, env_name[0], 1);
+			env_name = ft_split(ret[y], ' ');
+			str = ft_strjoin_env(str, ft_getenv(envp, env_name[0]), 3);
+			str = ft_strjoin_f(str, ft_substr(ret[y], ft_strlen(env_name[0]), ft_strlen(ret[y])), 3);
 			free_dptr(env_name);
 		}
-		else
-			str = ft_strjoin_env(str, ft_getenv(envp, ret[y]), 3);
 	}
 	free_dptr(ret);
 	return (str);
