@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_hd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 12:36:02 by sforesti          #+#    #+#             */
-/*   Updated: 2023/10/03 17:15:24 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/10/03 18:58:21 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,17 @@ char	*fd_to_str(int fd[2])
 		line = get_next_line(fd[0]);
 	}
 	return (str);
+}
+
+int	check(t_cmd *cmd, char **envp)
+{
+	if (cmd->file && cmd->file->type == 3 && (!cmd->arg[0] || g_pid == -4))
+	{
+		if (g_pid == -3 || g_pid == -4)
+			change_env(envp, "?=130");
+		else
+			change_env(envp, "?=0");
+		return (1);
+	}
+	return (0);
 }

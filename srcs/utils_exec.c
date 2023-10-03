@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:33:52 by sforesti          #+#    #+#             */
-/*   Updated: 2023/10/03 18:39:17 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/10/03 18:57:03 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,16 +102,8 @@ void	exec_cmd(t_cmd *cmd, char **envp, char *line)
 	tmp = NULL;
 	tp = NULL;
 	status = 0;
-	if (pipe(fd) == -1)
+	if (check(cmd, envp) || pipe(fd) == -1)
 		return ;
-	if (cmd->file && cmd->file->type == 3 && (!cmd->arg[0] || g_pid == -4))
-	{
-		if (g_pid == -3 || g_pid == -4)
-			change_env(envp, "?=130");
-		else
-			change_env(envp, "?=0");
-		return ;
-	}
 	if (!count_pipe(line) || !cmd->arg[0])
 		g_pid = fork();
 	if (g_pid == 0)

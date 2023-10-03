@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:44:13 by sforesti          #+#    #+#             */
-/*   Updated: 2023/10/03 15:39:42 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/10/03 18:57:59 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,5 +131,6 @@ char	*fd_to_str(int fd[2]);
 void	change_env(char **envp, char *str);
 int		verif(char *line);
 char	*get_line_env(char *str, char *ret);
+int		check(t_cmd *cmd, char **envp);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 09:54:40 by sforesti          #+#    #+#             */
-/*   Updated: 2023/10/03 15:55:16 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/10/03 18:49:16 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ char	*process_line(char *str, char **ret, char **envp)
 		{
 			env_name = ft_split(ret[y], ' ');
 			str = ft_strjoin_env(str, ft_getenv(envp, env_name[0]), 3);
-			str = ft_strjoin_f(str, ft_substr(ret[y], ft_strlen(env_name[0]), ft_strlen(ret[y])), 3);
+			str = ft_strjoin_f(str, ft_substr(ret[y],
+						ft_strlen(env_name[0]), ft_strlen(ret[y])), 3);
 			free_dptr(env_name);
 		}
 	}
