@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:33:52 by sforesti          #+#    #+#             */
-/*   Updated: 2023/10/03 14:32:57 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/10/03 16:40:34 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	failed_exec(char *tmp, t_cmd *cmd, int fd[2], char **envp)
 {
 	char	*str;
 
+	while (wait(NULL) > 0)
+		;
 	str = ft_getenv(envp, "PATH");
 	write(fd[1], "?=127", 6);
 	close(fd[1]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc_two.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:15:18 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/15 17:17:23 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/10/03 16:44:22 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	add_var_env(char *var, char **envp, char *line)
 int	is_good_name_var(char *str, int i)
 {
 	if (str[i] == '$' && (ft_isalpha(str[i + 1])
-			|| str[i] == '_' || str[i] == '?'))
+			|| str[i + 1] == '_' || str[i + 1] == '?'))
 		return (1);
 	return (0);
 }

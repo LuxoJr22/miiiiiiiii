@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_parse.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:01:47 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/22 14:32:47 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/10/03 16:30:46 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*ft_fill_str_pa(char const *s, int start, int end, char c)
 	nb_q = nb_quotes(s, start, end);
 	if (nb_q % 2 == 1)
 		nb_q -= 1;
-	str = malloc(sizeof(char) * (end - start + 3 - nb_q));
+	str = malloc(sizeof(char) * (end - start + 1 ));
 	if (!str)
 		return (0);
 	i = 0;
