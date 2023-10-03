@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:58:59 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/29 00:26:23 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/10/03 16:05:49 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	ft_exit(char **envp, char	**arg)
 	else if (arg[1] && arg[2])
 	{
 		ft_putstr_fd("Minishell: exit: too many arguments\n", 2);
+		g_pid = -3;
 		return ;
 	}
 	exit (i);

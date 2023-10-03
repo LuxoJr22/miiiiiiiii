@@ -6,7 +6,7 @@
 /*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:33:52 by sforesti          #+#    #+#             */
-/*   Updated: 2023/10/03 14:32:57 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/10/03 18:36:11 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	failed_exec(char *tmp, t_cmd *cmd, int fd[2], char **envp)
 	char	*str;
 
 	str = ft_getenv(envp, "PATH");
-	write(fd[1], "?=127", 6);
 	close(fd[1]);
 	if (cmd->arg[0][0] == '/' || !str)
 		tmp = ft_strjoin_f(ft_strjoin_f("Minishell: ", cmd->arg[0], 4),
@@ -68,11 +67,7 @@ void	get_line(char **envp, int fd)
 
 	i = read(fd, buf, 6);
 	if (i <= 0)
-	{
-		//if (g_pid > 0)
-		//	g_pid = -5;
 		return ;
-	}
 	g_pid = -6;
 	change_env(envp, buf);
 }
@@ -107,6 +102,14 @@ void	exec_cmd(t_cmd *cmd, char **envp, char *line)
 	status = 0;
 	if (pipe(fd) == -1)
 		return ;
+	if (cmd->file && cmd->file->type == 3 && (!cmd->arg[0] || g_pid == -4))
+	{
+		if (g_pid == -3 || g_pid == -4)
+			change_env(envp, "?=130");
+		else
+			change_env(envp, "?=0");
+		return ;
+	}
 	if (!count_pipe(line) || !cmd->arg[0])
 		g_pid = fork();
 	if (g_pid == 0)

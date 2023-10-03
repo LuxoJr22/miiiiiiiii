@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 12:42:08 by sforesti          #+#    #+#             */
-/*   Updated: 2023/08/16 19:01:44 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:03:40 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "stdio.h"
 
 int	find_nl(char *s)
 {
@@ -36,7 +37,7 @@ char	*get_buffer(int fd, char *buf_fd)
 	if (!buf_fd)
 		buf_fd = ft_calloc(1, 1);
 	buf_temp = 0;
-	while (find_nl(buf_fd) == -1 && i != 0)
+	while (find_nl(buf_fd) == -1 && (i != 0 || buf_fd[0]))
 	{
 		buf_temp = ft_calloc(sizeof(char), BUFFER_SIZE + 1);
 		i = read(fd, buf_temp, BUFFER_SIZE);

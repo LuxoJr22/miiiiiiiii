@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:42:38 by sforesti          #+#    #+#             */
-/*   Updated: 2023/09/15 13:34:56 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:18:25 by luxojr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ft_cd(char *path, char **envp)
 		ret = ft_strjoin_f("Minishell: cd: ", path, 4);
 		perror(ret);
 		free(ret);
+		g_pid = -3;
 		return ;
 	}
 	y = index_env("OLDPWD", envp);
