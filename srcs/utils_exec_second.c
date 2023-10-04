@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec_second.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 12:36:16 by sforesti          #+#    #+#             */
-/*   Updated: 2023/10/03 15:38:49 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/10/04 13:25:41 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,23 @@ void	free_dptr(char **dptr)
 char	*free_dptr_line(char **dptr, char *str)
 {
 	char	*ret;
+	char	**strs;
+	int		i;
 
+	i = 0;
 	if (str == NULL)
 		return (NULL);
-	ret = ft_strdup(str);
+	strs = ft_split_two(str, "\t ");
+	ret = ft_strdup("");
+	while (strs[i])
+	{
+		if (i != 0)
+			ret = ft_strjoin_f(ret, " ", 1);
+		ret = ft_strjoin_f(ret, strs[i], 1);
+		i ++;
+	}
 	free_dptr(dptr);
+	free_dptr(strs);
 	return (ret);
 }
 
