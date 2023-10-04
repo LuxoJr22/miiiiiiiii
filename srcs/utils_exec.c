@@ -6,7 +6,7 @@
 /*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:33:52 by sforesti          #+#    #+#             */
-/*   Updated: 2023/10/03 18:57:03 by sforesti         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:21:06 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,11 @@ void	get_line(char **envp, int fd)
 
 	i = read(fd, buf, 6);
 	if (i <= 0)
+	{
+		if (g_pid > 0)
+			g_pid = -8;
 		return ;
+	}
 	g_pid = -6;
 	change_env(envp, buf);
 }

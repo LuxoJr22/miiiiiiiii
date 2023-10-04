@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luxojr <luxojr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sforesti <sforesti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 13:29:31 by sforesti          #+#    #+#             */
-/*   Updated: 2023/10/03 18:43:12 by luxojr           ###   ########.fr       */
+/*   Updated: 2023/10/04 13:04:37 by sforesti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int	create_infile(char *limiter, char **envp)
 	str = NULL;
 	limiter = ft_strjoin_f(limiter, ft_strdup("\n"), 2);
 	line = NULL;
+	signal(SIGQUIT, fonction);
 	if (pipe(fd_hd) == -1)
 		perror("Minishell: HereDoc: ");
 	str = read_input(limiter, line);
@@ -126,5 +127,6 @@ int	create_infile(char *limiter, char **envp)
 	in_fd = dup(fd_hd[0]);
 	close(fd_hd[0]);
 	close(fd_hd[1]);
+	signal(SIGQUIT, ft_handle_ctrl_slash);
 	return (in_fd);
 }
